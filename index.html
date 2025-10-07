@@ -3,33 +3,174 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Il mio sito vetrina</title>
-  <link rel="stylesheet" href="style.css">
+  <title>🎉 BUON COMPLEANNOOO!!! 🎉</title>
+  <style>
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      font-family: "Comic Sans MS", cursive;
+      background: linear-gradient(45deg, hotpink, yellow, cyan, lime, orange);
+      background-size: 400% 400%;
+      animation: bgMove 5s infinite alternate ease-in-out;
+      cursor: crosshair;
+    }
+
+    @keyframes bgMove {
+      0% {background-position: 0 0;}
+      100% {background-position: 100% 100%;}
+    }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background: linear-gradient(to right, lime, fuchsia, cyan);
+      padding: 10px;
+      border-bottom: 5px dashed yellow;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 0 30px magenta;
+    }
+
+    .navbar button {
+      font-size: 1.2em;
+      background: linear-gradient(90deg, red, yellow, lime, cyan);
+      border: 3px solid purple;
+      border-radius: 10px;
+      color: black;
+      padding: 10px 20px;
+      font-weight: bold;
+      cursor: pointer;
+      text-shadow: 1px 1px 2px white;
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% {transform: scale(1);}
+      100% {transform: scale(1.2);}
+    }
+
+    /* HERO SECTION */
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+      color: white;
+      text-shadow: 3px 3px 10px black;
+      animation: rainbowText 2s infinite alternate;
+    }
+
+    @keyframes rainbowText {
+      0% {color: red;}
+      25% {color: yellow;}
+      50% {color: lime;}
+      75% {color: cyan;}
+      100% {color: magenta;}
+    }
+
+    /* RIQUADRI */
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 40px;
+    }
+
+    .card {
+      width: 250px;
+      height: 200px;
+      background: repeating-linear-gradient(45deg, magenta, magenta 10px, yellow 10px, yellow 20px);
+      border: 5px double lime;
+      border-radius: 20px;
+      box-shadow: 0 0 30px cyan;
+      color: black;
+      font-weight: bold;
+      text-align: center;
+      padding: 20px;
+      animation: spin 3s infinite linear;
+    }
+
+    @keyframes spin {
+      from {transform: rotate(0deg);}
+      to {transform: rotate(360deg);}
+    }
+
+    /* PARTICELLE BRILLANTI */
+    .sparkle {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+      pointer-events: none;
+      box-shadow: 0 0 10px white, 0 0 20px fuchsia, 0 0 30px yellow;
+      animation: fade 1s forwards;
+    }
+
+    @keyframes fade {
+      to {
+        transform: translateY(-20px) scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* TESTO SCORRENTE */
+    marquee {
+      font-size: 2em;
+      background: black;
+      color: lime;
+      padding: 10px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Benvenuto nel mio sito vetrina</h1>
-    <p>Qui mostro foto e video</p>
-  </header>
+  <div class="navbar">
+    <button>🎈 Home</button>
+    <button>🎂 Auguri</button>
+    <button>🎁 Regali</button>
+    <button>✨ Contatti</button>
+  </div>
 
-  <main>
-    <section class="foto">
-      <h2>Una foto di esempio</h2>
-      <img src="images/esempio.jpg" alt="Foto esempio">
-    </section>
+  <marquee direction="left" scrollamount="15">🎉🎉 BUON COMPLEANNOOOO!!! 🎉🎉 TANTI AUGURIII!!! 🎶🥳</marquee>
 
-    <section class="video">
-      <h2>Un video da YouTube</h2>
-      <iframe width="560" height="315" 
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-        title="Video di esempio"
-        frameborder="0" allowfullscreen>
-      </iframe>
-    </section>
-  </main>
+  <div class="hero">
+    <h1>🎉 AUGURIIII!!! 🎉</h1>
+    <p>Oggi è un giorno super speciale e pieno di colori orribili! 🌈💖</p>
+    <p>Preparati a festeggiare con brillantini, musica e tanto caos visivo! 💥</p>
+  </div>
 
-  <footer>
-    <p>© 2025 Il mio sito vetrina</p>
-  </footer>
+  <div class="cards">
+    <div class="card">🎁 Un mare di regali ti aspetta!</div>
+    <div class="card">🎂 Torta a volontà!</div>
+    <div class="card">🎊 Amici, musica e confusione!</div>
+    <div class="card">🎈 Colori e glitter ovunque!</div>
+  </div>
+
+  <script>
+    // Effetto brillantini che seguono il mouse
+    document.addEventListener("mousemove", e => {
+      const sparkle = document.createElement("div");
+      sparkle.className = "sparkle";
+      sparkle.style.left = e.pageX + "px";
+      sparkle.style.top = e.pageY + "px";
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 1000);
+    });
+
+    // Effetto particelle random sullo sfondo
+    function createRandomSparkles() {
+      const sparkle = document.createElement("div");
+      sparkle.className = "sparkle";
+      sparkle.style.left = Math.random() * window.innerWidth + "px";
+      sparkle.style.top = Math.random() * window.innerHeight + "px";
+      sparkle.style.background = ["white", "yellow", "cyan", "magenta", "lime"][Math.floor(Math.random() * 5)];
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 2000);
+    }
+    setInterval(createRandomSparkles, 100);
+  </script>
 </body>
 </html>
