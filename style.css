@@ -33,18 +33,18 @@
     }
 
     .navbar a {
-  font-size: 1.2em;
-  background: linear-gradient(90deg, red, yellow, lime, cyan);
-  border: 3px solid purple;
-  border-radius: 10px;
-  color: black;
-  padding: 10px 20px;
-  font-weight: bold;
-  cursor: pointer;
-  text-shadow: 1px 1px 2px white;
-  animation: pulse 1s infinite alternate;
-  text-decoration: none;
-}
+      font-size: 1.2em;
+      background: linear-gradient(90deg, red, yellow, lime, cyan);
+      border: 3px solid purple;
+      border-radius: 10px;
+      color: black;
+      padding: 10px 20px;
+      font-weight: bold;
+      cursor: pointer;
+      text-shadow: 1px 1px 2px white;
+      animation: pulse 1s infinite alternate;
+      text-decoration: none;
+    }
 
 
     @keyframes pulse {
@@ -158,3 +158,34 @@
       padding: 10px;
       font-weight: bold;
     }
+
+    .map-zoom-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  perspective: 1000px;
+}
+
+.map-zoom-container iframe {
+  width: 80%;
+  height: 400px;
+  border: 10px double magenta;
+  border-radius: 25px;
+  box-shadow: 0 0 40px cyan, 0 0 60px lime;
+  transform-origin: center center;
+  animation: mapZoom 10s ease-in-out forwards;
+}
+
+@keyframes mapZoom {
+  0% {
+    transform: scale(0.1) rotateX(60deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotateX(30deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotateX(0deg);
+  }
+}

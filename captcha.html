@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>🎉 FAKE CAPTCHA DI COMPLEANNO 🎉</title>
+  <style>
+    :root {
+      --piece-size: 80px; /* più piccolo ma proporzionato */
+    }
+
+    /* SFONDO ANIMATO ARCOBALENO */
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      font-family: "Comic Sans MS", cursive;
+      background: linear-gradient(45deg, magenta, yellow, cyan, lime, orange);
+      background-size: 400% 400%;
+      animation: bgMove 6s infinite alternate ease-in-out;
+      cursor: crosshair;
+    }
+
+    @keyframes bgMove {
+      0% {background-position: 0 0;}
+      100% {background-position: 100% 100%;}
+    }
+
+    /* CONTENITORE CENTRALE */
+    .wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      padding-top: 0px;
+      
+    }
+
+    /* CARD DEL CAPTCHA */
+    .card {
+      background: repeating-linear-gradient(45deg, lime, lime 10px, yellow 10px, yellow 20px);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 0 40px magenta, 0 0 80px cyan;
+      max-width: 90vw;
+      border: 6px double fuchsia;
+      animation: spinColors 4s infinite alternate;
+      text-align: center;
+    }
+
+    @keyframes spinColors {
+      0% {box-shadow: 0 0 40px magenta, 0 0 80px cyan;}
+      50% {box-shadow: 0 0 40px yellow, 0 0 80px lime;}
+      100% {box-shadow: 0 0 40px red, 0 0 80px blue;}
+    }
+
+    h1 {
+      font-size: 28px;
+      color: white;
+      text-shadow: 2px 2px 10px black, 0 0 15px magenta;
+      animation: rainbowText 2s infinite alternate;
+    }
+
+    @keyframes rainbowText {
+      0% {color: red;}
+      25% {color: yellow;}
+      50% {color: lime;}
+      75% {color: cyan;}
+      100% {color: magenta;}
+    }
+
+    p.small {
+      color: black;
+      font-size: 16px;
+      font-weight: bold;
+      background: white;
+      padding: 8px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px lime;
+    }
+
+    /* IMMAGINE DEL CAPTCHA */
+    .scene {
+      position: relative;
+      width: 100%;
+      max-width: 300px; /* immagine più piccola */
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 5px solid hotpink;
+      box-shadow: 0 0 25px cyan, 0 0 40px yellow;
+      background: white;
+    }
+
+    .image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .hole {
+      position: absolute;
+      width: var(--piece-size);
+      height: var(--piece-size);
+      border-radius: 10px;
+      outline: 4px dashed magenta;
+      box-shadow: inset 0 0 20px yellow;
+      background-color: rgba(255, 255, 255, 0.5); /* bianco al 30% di opacità */
+    }
+
+    .piece {
+      position: absolute;
+      width: var(--piece-size);
+      height: var(--piece-size);
+      border-radius: 10px;
+      cursor: grab;
+      border: 3px solid white;
+      box-shadow: 0 0 15px magenta, 0 0 30px lime;
+      transition: transform 0.2s ease;
+      animation: floaty 2s infinite alternate;
+    }
+
+    .piece:active {
+      transform: scale(1.1) rotate(5deg);
+      cursor: grabbing;
+    }
+
+    @keyframes floaty {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-5px); }
+    }
+
+    /* BOTTONI */
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 10px 15px;
+      border-radius: 10px;
+      border: 3px solid blue;
+      background: linear-gradient(90deg, yellow, lime, cyan, magenta);
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      text-shadow: 1px 1px 2px white;
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.2); }
+    }
+
+    .status {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: 900;
+      color: black;
+      background: white;
+      border-radius: 12px;
+      padding: 8px;
+      box-shadow: 0 0 15px magenta;
+    }
+
+    /* PARTICELLE BRILLANTI DEL MOUSE */
+    .sparkle {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+      pointer-events: none;
+      box-shadow: 0 0 10px white, 0 0 20px fuchsia, 0 0 30px yellow;
+      animation: fade 1s forwards;
+    }
+
+    @keyframes fade {
+      to {
+        transform: translateY(-20px) scale(0);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>🎂 FAKE PUZZLE CAPTCHA 🎂</h1>
+      <p class="small">Trascina il pezzo per ricomporre l'immagine e accedere al sito di compleanno più brutto del mondo! 🎉</p>
+
+      <div class="scene" id="scene">
+        <img id="mainImg" class="image" src="image.png" alt="demo image">
+        <div id="hole" class="hole" aria-hidden="true"></div>
+        <div id="piece" class="piece" role="slider" aria-label="pezzo puzzle" tabindex="0"></div>
+      </div>
+
+      <div class="controls">
+        <button id="resetBtn" class="btn">🔁 Riposiziona</button>
+        <button id="randomBtn" class="btn">🎲 Nuova posizione</button>
+      </div>
+
+      <div class="status" id="status">🧩 Sposta il pezzo nel foro per accedere 🧩</div>
+    </div>
+  </div>
+
+  <script>
+    // Effetto brillantini del mouse
+    document.addEventListener("mousemove", e => {
+      const sparkle = document.createElement("div");
+      sparkle.className = "sparkle";
+      sparkle.style.left = e.pageX + "px";
+      sparkle.style.top = e.pageY + "px";
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 1000);
+    });
+  </script>
+
+  <!-- Manteniamo tutto il tuo script originale -->
+  <script>
+  (function(){
+    const scene = document.getElementById('scene');
+    const mainImg = document.getElementById('mainImg');
+    const hole = document.getElementById('hole');
+    const piece = document.getElementById('piece');
+    const status = document.getElementById('status');
+    const resetBtn = document.getElementById('resetBtn');
+    const randomBtn = document.getElementById('randomBtn');
+    const config = { tolerance: 18 };
+    let holePos = {x:0,y:0};
+
+    function setStatus(txt, ok=false){status.textContent = txt;status.style.color = ok? 'green':'black'}
+
+    function updatePieceBackground(){
+      const w = mainImg.clientWidth;
+      const h = mainImg.clientHeight;
+      piece.style.backgroundImage = `url(${mainImg.src})`;
+      piece.style.backgroundSize = `${w}px ${h}px`;
+      piece.style.backgroundPosition = `-${holePos.x}px -${holePos.y}px`;
+    }
+
+    function layoutElements(){
+      const pieceSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--piece-size'));
+      const w = mainImg.clientWidth;
+      const h = mainImg.clientHeight;
+      hole.style.left = holePos.x + 'px';
+      hole.style.top = holePos.y + 'px';
+      piece.style.left = (w - pieceSize - 10) + 'px';
+      piece.style.top = (h - pieceSize - 10) + 'px';
+      updatePieceBackground();
+    }
+
+    function randomHolePosition(){
+      const pieceSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--piece-size'));
+      const w = mainImg.clientWidth;
+      const h = mainImg.clientHeight;
+      const pad = 20;
+      holePos.x = Math.floor(Math.random() * (w - pieceSize - pad));
+      holePos.y = Math.floor(Math.random() * (h - pieceSize - pad));
+    }
+
+    function checkPlaced(){
+      const px = parseFloat(piece.style.left);
+      const py = parseFloat(piece.style.top);
+      const dx = Math.abs(px - holePos.x);
+      const dy = Math.abs(py - holePos.y);
+      const dist = Math.hypot(dx,dy);
+      if(dist <= config.tolerance){
+        piece.style.left = holePos.x + 'px';
+        piece.style.top = holePos.y + 'px';
+        piece.style.pointerEvents = 'none';
+        setStatus('✅ Verificato! Accesso consentito!');
+        setTimeout(()=>{window.location.href='home.html';},800);
+        return true;
+      }
+      return false;
+    }
+
+    let drag = {active:false,offsetX:0,offsetY:0};
+
+    function onPointerDown(e){
+      drag.active = true;
+      const rect = scene.getBoundingClientRect();
+      const x = (e.touches? e.touches[0].clientX : e.clientX) - rect.left;
+      const y = (e.touches? e.touches[0].clientY : e.clientY) - rect.top;
+      const left = parseFloat(piece.style.left) || 0;
+      const top = parseFloat(piece.style.top) || 0;
+      drag.offsetX = x - left;
+      drag.offsetY = y - top;
+    }
+
+    function onPointerMove(e){
+      if(!drag.active) return;
+      const rect = scene.getBoundingClientRect();
+      const clientX = (e.touches? e.touches[0].clientX : e.clientX);
+      const clientY = (e.touches? e.touches[0].clientY : e.clientY);
+      const x = clientX - rect.left - drag.offsetX;
+      const y = clientY - rect.top - drag.offsetY;
+      const pieceSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--piece-size'));
+      const nx = Math.max(0, Math.min(mainImg.clientWidth - pieceSize, x));
+      const ny = Math.max(0, Math.min(mainImg.clientHeight - pieceSize, y));
+      piece.style.left = nx + 'px';
+      piece.style.top = ny + 'px';
+    }
+
+    function onPointerUp(){
+      if(!drag.active) return;
+      drag.active = false;
+      if(!checkPlaced()) setStatus('❌ Non perfetto — riprova!');
+    }
+
+    piece.addEventListener('mousedown', onPointerDown);
+    piece.addEventListener('touchstart', onPointerDown,{passive:false});
+    window.addEventListener('mousemove', onPointerMove);
+    window.addEventListener('touchmove', onPointerMove,{passive:false});
+    window.addEventListener('mouseup', onPointerUp);
+    window.addEventListener('touchend', onPointerUp);
+
+    resetBtn.addEventListener('click', ()=>{piece.style.pointerEvents='auto';layoutElements();setStatus('🔄 Sposta di nuovo il pezzo');});
+    randomBtn.addEventListener('click', ()=>{piece.style.pointerEvents='auto';randomHolePosition();layoutElements();setStatus('🎲 Nuova posizione generata!');});
+
+    mainImg.addEventListener('load', ()=>{randomHolePosition();layoutElements();});
+    randomHolePosition();layoutElements();
+  })();
+  </script>
+</body>
+</html>

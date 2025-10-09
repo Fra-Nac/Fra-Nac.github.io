@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎉 BUON COMPLEANNOOO!!! 🎉</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="navbar">
+  <a href="home.html">🎈 Home</a>
+  <a href="auguri.html">🎂 Auguri</a>
+  <a href="regali.html">🎁 Regali</a>
+  <a href="contatti.html">✨ Contatti</a>
+</div> 
+
+
+  <marquee direction="left" scrollamount="15">🎉🎉 BUON COMPLEANNOOOO!!! 🎉🎉 TANTI AUGURIII!!! 🎶🥳</marquee>
+
+  <div class="hero">
+    <h1>🎉 AUGURIIII!!! 🎉</h1>
+    <p>Oggi è un giorno super speciale e pieno di colori orribili! 🌈💖</p>
+    <p>Preparati a festeggiare con brillantini, musica e tanto caos visivo! 💥</p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <img src="image.png" alt="Regalo" />
+    </div>
+    <div class="card">🎂 Torta a volontà!</div>
+    <div class="card">🎊 Amici, musica e confusione!</div>
+    <div class="card">🎈 Colori e glitter ovunque!</div>
+  </div>
+
+  <script>
+    // Effetto brillantini che seguono il mouse
+    document.addEventListener("mousemove", e => {
+      const sparkle = document.createElement("div");
+      sparkle.className = "sparkle";
+      sparkle.style.left = e.pageX + "px";
+      sparkle.style.top = e.pageY + "px";
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 1000);
+    });
+
+    // Effetto particelle random sullo sfondo
+    function createRandomSparkles() {
+      const sparkle = document.createElement("div");
+      sparkle.className = "sparkle";
+      sparkle.style.left = Math.random() * window.innerWidth + "px";
+      sparkle.style.top = Math.random() * window.innerHeight + "px";
+      sparkle.style.background = ["white", "yellow", "cyan", "magenta", "lime"][Math.floor(Math.random() * 5)];
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 2000);
+    }
+    setInterval(createRandomSparkles, 100);
+  </script>
+</body>
+
+</html>
