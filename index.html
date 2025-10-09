@@ -1,148 +1,21 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🎉 BUON COMPLEANNOOO!!! 🎉</title>
-  <style>
-    body {
-      margin: 0;
-      overflow-x: hidden;
-      font-family: "Comic Sans MS", cursive;
-      background: linear-gradient(45deg, hotpink, yellow, cyan, lime, orange);
-      background-size: 400% 400%;
-      animation: bgMove 5s infinite alternate ease-in-out;
-      cursor: crosshair;
-    }
-
-    @keyframes bgMove {
-      0% {background-position: 0 0;}
-      100% {background-position: 100% 100%;}
-    }
-
-    /* NAVBAR */
-    .navbar {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      background: linear-gradient(to right, lime, fuchsia, cyan);
-      padding: 10px;
-      border-bottom: 5px dashed yellow;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 0 30px magenta;
-    }
-
-    .navbar button {
-      font-size: 1.2em;
-      background: linear-gradient(90deg, red, yellow, lime, cyan);
-      border: 3px solid purple;
-      border-radius: 10px;
-      color: black;
-      padding: 10px 20px;
-      font-weight: bold;
-      cursor: pointer;
-      text-shadow: 1px 1px 2px white;
-      animation: pulse 1s infinite alternate;
-    }
-
-    @keyframes pulse {
-      0% {transform: scale(1);}
-      100% {transform: scale(1.2);}
-    }
-
-    /* HERO SECTION */
-    .hero {
-      text-align: center;
-      padding: 60px 20px;
-      color: white;
-      text-shadow: 3px 3px 10px black;
-      animation: rainbowText 2s infinite alternate;
-    }
-
-    @keyframes rainbowText {
-      0% {color: red;}
-      25% {color: yellow;}
-      50% {color: lime;}
-      75% {color: cyan;}
-      100% {color: magenta;}
-    }
-
-    /* RIQUADRI */
-    .cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 40px;
-    }
-
-    .card {
-      width: 250px;
-      height: 200px;
-      background: repeating-linear-gradient(45deg, magenta, magenta 10px, yellow 10px, yellow 20px);
-      border: 5px double lime;
-      border-radius: 20px;
-      box-shadow: 0 0 30px cyan;
-      color: black;
-      font-weight: bold;
-      text-align: center;
-      padding: 20px;
-      animation: spin 3s infinite linear;
-    }
-    .card img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-top: 10px;
-  border: 3px solid white;
-  box-shadow: 0 0 15px magenta;
-}
-
-
-    @keyframes spin {
-      from {transform: rotate(0deg);}
-      to {transform: rotate(360deg);}
-    }
-
-    /* PARTICELLE BRILLANTI */
-    .sparkle {
-      position: fixed;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: white;
-      pointer-events: none;
-      box-shadow: 0 0 10px white, 0 0 20px fuchsia, 0 0 30px yellow;
-      animation: fade 1s forwards;
-    }
-
-    @keyframes fade {
-      to {
-        transform: translateY(-20px) scale(0);
-        opacity: 0;
-      }
-    }
-
-    /* TESTO SCORRENTE */
-    marquee {
-      font-size: 2em;
-      background: black;
-      color: lime;
-      padding: 10px;
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <div class="navbar">
-    <button>🎈 Home</button>
-    <button>🎂 Auguri</button>
-    <button>🎁 Regali</button>
-    <button>✨ Contatti</button>
-  </div>
+  <a href="index.html">🎈 Home</a>
+  <a href="auguri.html">🎂 Auguri</a>
+  <a href="regali.html">🎁 Regali</a>
+  <a href="contatti.html">✨ Contatti</a>
+</div>
+
 
   <marquee direction="left" scrollamount="15">🎉🎉 BUON COMPLEANNOOOO!!! 🎉🎉 TANTI AUGURIII!!! 🎶🥳</marquee>
 
@@ -153,7 +26,7 @@
   </div>
 
   <div class="cards">
-    <div class="card">🎁 Un mare di regali ti aspetta!
+    <div class="card">
       <img src="image.png" alt="Regalo" />
     </div>
     <div class="card">🎂 Torta a volontà!</div>
@@ -185,4 +58,5 @@
     setInterval(createRandomSparkles, 100);
   </script>
 </body>
+
 </html>
