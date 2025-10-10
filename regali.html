@@ -5,8 +5,189 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🎁 Regali!</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+        :root {
+            --card-w: 360px;
+            --card-h: 240px;
+        }
+
+        .scene {
+            position: relative;
+            height: calc(var(--card-h) + 120px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+
+
+        /* Busta */
+        .envelope {
+            position: absolute;
+            bottom: 0;
+            width: var(--card-w);
+            height: var(--card-h);
+            perspective: 900px;
+            cursor: pointer;
+            transition: transform 2s ease, opacity 1s ease;
+        }
+
+        /* Corpo */
+        .back {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #ffd6f0, #fff6b2);
+            border: 6px solid magenta;
+            border-radius: 8px;
+            z-index: 1;
+        }
+
+        /* Contenuto interno */
+        .inner {
+            position: absolute;
+            inset: 12px;
+            background: white;
+            border-radius: 6px;
+            overflow: visible;
+            transition: transform 1.2s;
+            z-index: 1;
+        }
+
+        .inner1 {
+            position: absolute;
+            inset: 12px;
+            border-radius: 6px;
+            overflow: visible;
+            transition: transform 1.2s;
+            z-index: 1;
+        }
+
+        /* Immagine */
+        .letter {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: translateY(0);
+            transition: transform 1.2s ease-in-out;
+            z-index: 0;
+        }
+
+        .letter img {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            object-fit: cover;
+        }
+
+        /* Quando la busta si apre, l'immagine sale verso l'alto */
+        .envelope.open .letter {
+            transform: translateY(-120%);
+            z-index: 3;
+        }
+
+        .envelope.open .inner1 {
+            z-index: 3;
+        }
+
+        /* Alette */
+        .flap-top,
+        .flap-bottom {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            transform-origin: top center;
+            transition: transform 0.7s cubic-bezier(.2, .9, .2, 1);
+        }
+
+        .flap-top {
+            top: 0;
+            background: linear-gradient(180deg, #ff6ea6, #ffefd6);
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .2);
+            z-index: 2;
+        }
+
+        .flap-bottom {
+            bottom: 0;
+            height: 48%;
+            background: linear-gradient(0deg, #ffd1f0, #d7fff0);
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            z-index: 4;
+        }
+
+        .envelope.open .flap-top {
+            transform: rotateX(-180deg);
+        }
+
+        /* Sigillo decorativo */
+        .seal {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #ffecb3, #ff8ac2);
+            border: 4px solid magenta;
+            border-radius: 50%;
+            box-shadow: 0 0 20px cyan;
+            z-index: 5;
+            transition: transform 0.5s;
+        }
+
+        .envelope.open .seal {
+            transform: translate(-50%, -50%) scale(0.7) rotate(-10deg);
+            opacity: 0.7;
+        }
+
+        .flap-top,
+        .flap-bottom,
+        .back,
+        .inner,
+        .seal {
+            transition: transform 1s ease, opacity 1s ease;
+        }
+
+        /* Animazione di uscita */
+        .envelope.flyaway .flap-top {
+            transform: translateY(-200%) rotate(10deg);
+            opacity: 0;
+        }
+
+        .envelope.flyaway .flap-bottom {
+            transform: translateY(-200%) rotate(10deg);
+            opacity: 0;
+        }
+
+        .envelope.flyaway .back {
+            transform: translateY(-200%) rotate(10deg);
+            opacity: 0;
+        }
+
+        .envelope.flyaway .seal {
+            transform: translateY(-200%) rotate(10deg);
+            opacity: 0;
+        }
+
+        .envelope.flyaway .inner {
+            transform: translateY(-200%) rotate(10deg);
+            opacity: 0;
+        }
+
+        /* Immagine finale (dopo che la busta è andata via) */
+    </style>
 </head>
 <body>
+    
   <div class="navbar">
     <a href="home.html">🎈 Home</a>
     <a href="auguri.html">🎂 Auguri</a>
@@ -16,8 +197,37 @@
 
   <div class="hero">
     <h1>🎁 I REGALI!!! 🎁</h1>
-    <p>Hai ricevuto un mare di doni scintillanti! ✨</p>
-    <img src="img/regalo.png" alt="Regalo" width="150">
   </div>
+  <div class="scene">
+        <h1>💌 Clicca la busta per aprirla!</h1>
+
+        <div class="envelope" id="envelope">
+            <div class="back"></div>
+            <div class="inner"></div>
+            <div class="inner1">
+                <div class="letter">
+                    <img src="download.jpeg" alt="Immagine sorpresa">
+                </div>
+            </div>
+            <div class="flap-top"></div>
+            <div class="flap-bottom"></div>
+            <div class="seal">💖</div>
+        </div>
+    </div>
+    <script>
+        const envelope = document.getElementById('envelope');
+        const finalImage = document.getElementById('finalImage');
+
+        envelope.addEventListener('click', () => {
+            // 1️⃣ Apri la busta
+            envelope.classList.add('open');
+
+            // 2️⃣ Dopo un po', chiudi la busta e falla volare via
+            setTimeout(() => {
+                envelope.classList.remove('open');
+                envelope.classList.add('flyaway');
+            }, 1000);
+        });
+    </script>
 </body>
 </html>

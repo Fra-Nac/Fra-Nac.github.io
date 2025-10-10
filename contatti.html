@@ -1,31 +1,80 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>✨ Contatti</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Contatti</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            width: 80%;
+            height: 400px;
+            margin: 30px auto;
+            border: 10px double magenta;
+            border-radius: 25px;
+            box-shadow: 0 0 40px cyan, 0 0 60px lime;
+        }
+    </style>
+    <script src="https://unpkg.com/leaflet.terrainlayer"></script>
+
 </head>
+
 <body>
-  <div class="navbar">
-    <a href="home.html">🎈 Home</a>
-    <a href="auguri.html">🎂 Auguri</a>
-    <a href="regali.html">🎁 Regali</a>
-    <a href="contatti.html">✨ Contatti</a>
-  </div>
+    <div class="navbar">
+        <a href="home.html">🎈 Home</a>
+        <a href="auguri.html">🎂 Auguri</a>
+        <a href="regali.html">🎁 Regali</a>
+        <a href="contatti.html">✨ Contatti</a>
+    </div>
 
-  <div class="hero">
-    <h1>✨ CONTATTI ✨</h1>
-    <p>Scrivici per inviare altri auguri o per mandarci un regalo virtuale! 💌</p>
-    <p>Email: <a href="mailto:antonia.perassi@edu.unito.it">antonia.perassi@edu.unito.it</a></p>
-  </div>
+    <div class="hero">
+        <h1>✨ CONTATTI ✨</h1>
+        <p>Scrivici per inviare altri auguri o per mandarci un regalo virtuale! 💌</p>
+        <p>Email: <a href="mailto:antonia.perassi@edu.unito.it">antonia.perassi@edu.unito.it</a></p>
+    </div>
 
-  <div class="map-zoom-container">
-  <iframe
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d45106.89888237404!2d7.655070190136732!3d45.04154509390465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478812d094358049%3A0x890c403e05093d76!2sResidenza%20Universitaria%20EDISU%20Paoli!5e0!3m2!1sit!2sit!4v1760030072836!5m2!1sit!2sit"
-    allowfullscreen=""
-    loading="lazy">
-  </iframe>
-</div>
+    <div id="map"></div>
+<iframe width="560" height="315"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen>
+</iframe>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Inizializza la mappa con zoom basso
+        const map = L.map('map').setView([45.03444407938819, 7.651699691265035], 1);
+
+        // Tiles OpenStreetMap
+        // Tiles satellitari Esri (simile a Google Earth)
+        L.tileLayer(
+            'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+            {
+                attribution: 'Tiles © Esri, Earthstar Geographics'
+            }
+        ).addTo(map);
+
+
+        // Marker con popup
+        L.marker([45.03444407938819, 7.651699691265035]).addTo(map)
+            .bindPopup('Siamo qui! ✨')
+            .openPopup();
+
+        // Zoom fluido automatico con flyTo
+        map.flyTo([45.03444407938819, 7.651699691265035], 18, {
+            duration: 10,       // durata in secondi
+            easeLinearity: 1 // transizione morbida
+        });
+        // Layer rilievi (facoltativo)
+        L.tileLayer(
+            'https://tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png',
+            { attribution: 'Hillshade by Wikimedia' }
+        ).addTo(map);
+
+    </script>
 </body>
+
 </html>
