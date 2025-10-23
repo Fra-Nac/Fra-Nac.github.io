@@ -485,12 +485,12 @@
 
 <body>
   <header>
-    <div class="logo">アント ショップ</div>
+    <div class="logo"><a style="text-decoration: none;" href="#/">アント ショップ</a></div>
 
     <nav>
-      <a href="#/">Home</a>
       <a href="#/category/gadgets">Gadgets</a>
       <a href="#/category/vestiti">Vestiti</a>
+      <a href="#/category/casa">Casa</a>
       <a href="#/cart">Carrello</a>
     </nav>
     <div class="back-bar">
@@ -501,42 +501,78 @@
   <main id="app">
     <!-- Render dinamico qui -->
   </main>
-  <footer>Tutti gli ordini vengono spediti da Saluzzo (CN) con costi di spedizione fissi (100€). <br>Non ci assumiamo nessuna responsabilità per pacchi smarriti. Cazzi vostri.</footer>
+  <footer>Tutti gli ordini vengono spediti da Saluzzo (CN) con costi di spedizione fissi (100€). <br>Non ci assumiamo
+    nessuna responsabilità per pacchi smarriti. Cazzi vostri.</footer>
 
   <script>
 
     // Dati dei prodotti (client-only)
     const PRODUCTS = [
       {
-        id: 'p1', title: 'Cuscino Fuoco Totale', price: '19.99€', category: 'home', desc: 'Un cuscino comodissimo, ideale per appoggiarci il culo sopra.',
+        id: 'p1', title: 'Cuscino EDIZIONE NINUZZA FA COSE: Selfie', price: '19.99€', category: 'casa', desc: 'Un cuscino comodissimo con Ninuzza che si fa un selfie, visione fronte retro. Iper-dettagliato.',
         imageUrl: 'img/cuscino1black.png', variants: {
           Nero: 'img/cuscino1black.png',
           Rosso: 'img/cuscino1red.png',
           Blu: 'img/cuscino1blue.png'
-        }, sizes: ['Nero', 'Rosso', 'Blu'], related: ['p2', 'p3'], comments: [{ user: 'Luca', text: 'Mi ha folgorato! Lo uso sempre quando ho le emorroidi, è comodissimo.', date: '2025-10-01' }]
+        }, sizes: ['Nero', 'Rosso', 'Blu'], related: ['p10','p4'], comments: [{ user: 'Luca', text: 'Ho usato il cuscino pensando fosse adatto alle emorroidi, forse ho fatto un acquisto sbagliato.', date: '2025-10-01' }, { user: 'Lorenza', text: 'Lo uso sempre per curare le mie cervicali, sentire Ninuzza così vicino a me, mi fa sentire al sicuro e mi rilassa i muscoli.', date: '2025-10-15' }, { user: 'Lucrezia_tuttafessa', text: 'Dopo una lunga e pesante giornata faccio rilassare il mio seno poggiandolo su questo soffice cuscino, molto morbido e apprezzato. Tengo Ninuzza vicino al mio cuore.', date: '2025-10-15' }]
       },
       {
-        id: 'p2', title: 'Maglia Incredibile Ninuzza Limited Edition', price: '29.90€', category: 'home', desc: 'Maglietta di design, frutto di una collaborazione tra i migliori stilisti italiani.',
-        imageUrl: 'img/maglia1.jpeg', sizes: ['S', 'M', 'L'], related: ['p1', 'p4'], comments: []
+        id: 'p2', title: 'Maglia EDIZIONE NINUZZA FA COSE: Linguaccia', price: '29.90€', category: 'vestiti', desc: 'Maglietta in cotone, per persone estroverse ed aggressive come nina in questa maglia! Non lavare in lavatrice, Antonia si aspetta un trattamento migliore da parte tua coglione!',
+        imageUrl: 'img/maglia1.jpeg', sizes: ['S', 'M', 'L'], related: ['p5'], comments: [{ user: 'Carola', text: 'Ho conosciuto il mio attuale ragazzo grazie a questa maglietta. Si è avvicinato a me e abbiamo iniziato a parlare con quel pretesto, abbiamo un bel legame con Ninuzza però ho paura che il mio ragazzo sia innamorato di lei più che di me.', date: '2025-10-15' }, { user: 'Manuel', text: 'La uso sempre per andare in palestra, mi fa sudare un casino però fa niente, non posso togliermi Ninuzza di dosso.', date: '2025-10-15' }]
       },
       {
-        id: 'p3', title: 'Tazza Buongiornissimo', price: '9.50€', category: 'kitchen', desc: 'Per iniziare la giornata con il piede giusto.',
-        imageUrl: 'img/tazza1.jpeg', sizes: ['S', 'M', 'L'], related: ['p1'], comments: [{ user: 'Anna', text: 'La uso ogni mattina, i miei vicini sono preoccupati.', date: '2025-09-20' }]
+        id: 'p3', title: 'Tazza Buongiornissimo Ninù', price: '11.50€', category: 'casa', desc: 'Tazza in ceramica riciclata. Non usare con caffè perchè si macchia. Non usare con latte perchè si impuzzolisce. Non usare con liquidi caldi perchè si spacca. Non usare.',
+        imageUrl: 'img/tazza1.jpeg', 
+        variants: {
+          Bianco: 'img/tazza1.jpeg',
+          Rosso: 'img/tazza1rossa.png',
+          Viola: 'img/tazza1lilla.png',
+          Rosa: 'img/tazza1rosa.png',
+          Verde: 'img/tazza1verde.png',
+          Gialla: 'img/tazza1gialla.png'
+        },
+        sizes: ['Bianco', 'Rosso', 'Viola', 'Rosa', 'Verde', 'Gialla'], related: ['p1'], comments: [{ user: 'Anna', text: 'La uso ogni mattina, i miei vicini sono preoccupati.', date: '2025-09-20' }, { user: 'Enzo', text: 'Lho comprata per mia moglie, non ho ben capito come si dovrebbe usare, mia moglie però è felice, vabene così.', date: '2025-10-15' }, { user: 'Cristiano', text: 'Non era chiaro come usarlo quindi in un attacco di rabbia lho lanciato sulla testa del mio vicino, sono accusato di tentato omicidio.', date: '2025-10-15' }]
       },
       {
         id: 'p4', title: 'Peluche Antonietta', price: '12.00€', category: 'gadgets', desc: 'Morbidissimo peluche.',
-        imageUrl: 'img/peluche1.png', sizes: ['S', 'M', 'L'], related: ['p2'], comments: []
+        imageUrl: 'img/peluche1.png',variants: {
+          TipoA: 'img/peluche1.png',
+          TipoB: 'img/peluche2.png'
+        }, sizes: ['TipoA', 'TipoB'], related: ['p1','p10'], comments: [{ user: 'Manuela', text: 'Mi ha cambiato la vita, mi da lamore che non ho mai ricevuto da mia mamma.', date: '2025-10-15' }, { user: 'Mariella', text: 'Lho comprata a mia figlia, adesso è felice, mi sento una madre migliore.', date: '2025-10-15' }, { user: 'Gorilla_63', text: 'Le donne mi dicono che sono insensibile, forse è ver. Però, questo peluche mi fa tornare bambino. Grazie Antonia per farmi provare queste sensazioni.', date: '2025-10-15' }]
       },
       {
-        id: 'p5', title: 'Felpa Swag Gags', price: '14.40€', category: 'clown', desc: 'Il drip definitivo, per veri giapponesi.',
-        imageUrl: 'img/maglia2.png', sizes: ['S', 'M', 'L'], related: ['p3'], comments: [{ user: 'Bea', text: 'Rido ancora quando lo indosso.', date: '2025-08-15' }]
+        id: 'p5', title: 'Felpa Swag drip meme', price: '14.40€', category: 'vestiti', desc: 'Il drip definitivo, meme giapponesi, cinesi e cose del genere',
+        imageUrl: 'img/maglia2.png', sizes: ['S', 'M', 'L'], related: ['p2'], comments: [{ user: 'Anna', text: 'Lho comprata perchè ho visto che aveva scritte giapponesi così potevo inserirmi più facilmente nel gruppo di amiche che studiano giapponese. Non so perchè ma ora mi odiano', date: '2025-10-15' }, { user: 'Nero_PsPs', text: 'Il governo comunista cinese mi ha arrestato, non so dove sono, venitemi ad aiutare.', date: '2025-10-15' }, { user: 'Chinese_government', text: 'Riteniamo questo prodotto molto offensivo nei confronti della nostra cultura, cancellatelo o ci saranno conseguenze.', date: '2025-10-15' }]
       },
       {
-        id: 'p6', title: 'Felpa Swag Gags', price: '14.40€', category: 'clown', desc: 'Cappello a cipolla con pompon gigante. Ridicolo e resistente.',
-        imageUrl: 'img/maglia2.png', sizes: ['S', 'M', 'L'], related: ['p3'], comments: [{ user: 'Bea', text: 'Rido ancora quando lo indosso.', date: '2025-08-15' }]
+        id: 'p6', title: 'Action figure Ninuzza Casual', price: '54.95€', category: 'gadgets', desc: 'Antonia così come è. Niente di più niente di meno. Lei è perfetta compratela!',
+        imageUrl: 'img/figure1.png', related: ['p8','p7','p9'],
+        comments: [{ user: 'Flavio_40', text: 'Mi piace un casino, lho messa vicino al busto del DUCE, ci sta un casino, godooooo uuuuhuhuhuhu.', date: '2025-08-15' }, { user: 'Indipendentwoman', text: 'Amo questa action-figure perchè rappresenta la donna libera dai canoni estetici, una donna libera di vestirsi come cazzo vuole. #Killallmen', date: '2025-08-15' }, { user: 'Roberto', text: 'Lho comprata a mia moglie, almeno la smette di parlare di donne indipendenti bla bla bla.', date: '2025-08-15' }]
+      },
+      {
+        id: 'p7', title: 'Action figure Ninuzza Dottoressa', price: '95.60€', category: 'gadgets', desc: 'Antonia sa essere tante cose. Anche una piccola e dolce chimica. Acquista questa edizione limitata.',
+        imageUrl: 'img/figure3.png', related: ['p8','p9','p6'], comments: [{ user: 'Beatrice', text: 'Antonia è una persona ispiratrice, guardo quest action figure ogni mattina e ricordo che posso essere quello che voglio.', date: '2025-08-15' }, { user: 'Professionalgooner', text: 'Best cum-tribute della mia vita intera. Poi lho venduto su Vinted tutto sporco, non ditelo a nessuno', date: '2025-08-15' }, { user: 'Baldo', text: 'Boh mi piaceva e lho comprato.', date: '2025-08-15' }]
+      },
+      {
+        id: 'p8', title: 'Action figure Ninuzza Strega furiosa', price: '149.99€', category: 'gadgets', desc: 'Attento a farti sorprendere impreparato da Antonia, potrebbe farti qualche incantesimo! Acquista questa edizione limitatissima con luci magiche! 220V-12V',
+        imageUrl: 'img/figure2.png', related: ['p9','p7','p6'], comments: [{ user: 'Bastardofurioso_22', text: 'Mia moglie dice che devo smetterla di comprare ste stronzate ma come faccio a non acquistare Antonia in tutte le sue forme? Sono ossessionato ho tutto il suo merchandise', date: '2025-08-15' }, { user: 'Potter', text: 'Lho collegato ieri notte, è bellissimo vedere questa luce al buio, stamattina lho dimenticata accesa; purtroppo non ho più una casa dato che si è incendiata, attenti, imparate dalla mia brutta esperienza', date: '2025-08-15' }]
+      },
+      {
+        id: 'p9', title: 'Funko Pop Ninuzza Casual', price: '14.40€', category: 'gadgets', desc: 'Funko Pop Ninuzza Causal, cosa vuoi che ti dica questo è quello che vedi in foto. Cè poco da descrivere',
+        imageUrl: 'img/funko1.png', variants: {
+          TipoA: 'img/funko1.png',
+          TipoB: 'img/funko2.png',
+          TipoC: 'img/funko3.png'
+        }, sizes: ['TipoA', 'TipoB', 'TipoC'], related: ['p8','p7','p6'], comments: [{ user: 'FunkyPopwhitegirl', text: 'Nella mia vita ci sono due ossessioni: Antonia e i Funko Pop. Quando ho visto questo prodotto sono svenuta, ne ho acquistati 5, non importa se sono uguali.', date: '2025-08-15' }, { user: 'Filippo', text: 'Ho provato a comprare questo funko pop alla mia ex moglie dato che le piacciono tanto... purtroppo ne aveva già altri 5.', date: '2025-08-15' }, { user: 'Giorgio', text: 'Sono un receptionist. Sono un grande collezionista di Funko Pop, quando ho visto che ce nera uno di una ragazza della residenza in cui lavoro non ho resistito', date: '2025-08-15' }]
+      },
+      {
+        id: 'p10', title: 'Body pillow Ninuzza', price: '54.99€', category: 'casa', desc: 'Comodissimo cuscino per combattere la solitudine.',
+        imageUrl: 'img/bodypillow1.png',variants: {
+          TipoA: 'img/bodypillow1.png',
+          TipoB: 'img/bodypillow2.png'
+        }, sizes: ['TipoA', 'TipoB'], related: ['p1','p4'], comments: [{ user: 'a', text: 'a', date: '2025-10-15' }, { user: 'a', text: 'a', date: '2025-10-15' }, { user: 'a', text: 'a', date: '2025-10-15' }]
       }
     ];
-
     // Funzione per creare data URI SVG (piccoli "immagini")
     function makeSVG(text, bg, accent) {
       const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'>
@@ -800,12 +836,10 @@
       if (backBtn) {
         backBtn.addEventListener('click', () => {
           // Se l’utente ha una pagina precedente nella cronologia
-          if (document.referrer && document.referrer !== window.location.href) {
-            window.history.back();
-          } else {
+         
             // Altrimenti torna a un link specifico (metti qui il tuo sito vero)
-            window.location.href = "https://iltuosito.it";
-          }
+            window.location.href = "home.html";
+          
         });
       }
     });

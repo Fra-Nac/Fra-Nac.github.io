@@ -250,6 +250,14 @@
         grid-template-columns: repeat(4, 1fr);
       }
     }
+    .card-img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 0 10px white;
+}
+
   </style>
 </head>
 
@@ -279,116 +287,123 @@
 
   <script>
     (() => {
-      const board = document.getElementById('board');
-      const startBtn = document.getElementById('startBtn');
-      const timerEl = document.getElementById('timer');
-      const scoreEl = document.getElementById('score');
-      const winEl = document.getElementById('win');
+  const board = document.getElementById('board');
+  const startBtn = document.getElementById('startBtn');
+  const timerEl = document.getElementById('timer');
+  const scoreEl = document.getElementById('score');
+  const winEl = document.getElementById('win');
 
-      const symbols = ['🍎', '🍊', '🍉', '🍇', '🍒', '🍓', '🥝', '🍍']; // 8 coppie
-      let firstCard = null;
-      let lock = false;
-      let score = 0;
-      let matches = 0;
-      let time = 0;
-      let timer = null;
-      let gameActive = false; // 👉 serve per bloccare le carte prima dello start
+  // 🖼️ Usa immagini invece delle emoji
+  const symbols = [
+    'img/mela.png',
+    'img/arancia.png',
+    'img/anguria.png',
+    'img/uva.png',
+    'img/ciliegia.png',
+    'img/fragola.png',
+    'img/kiwi.png',
+    'img/ananas.png'
+  ];
 
-      // funzione per mischiare un array
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-      }
+  let firstCard = null;
+  let lock = false;
+  let score = 0;
+  let matches = 0;
+  let time = 0;
+  let timer = null;
+  let gameActive = false;
 
-      // CREA IL BOARD SUBITO AL CARICAMENTO
-      function createBoard() {
-        board.innerHTML = '';
-        winEl.textContent = '';
-        matches = 0;
-        score = 0;
-        time = 0;
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  function createBoard() {
+    board.innerHTML = '';
+    winEl.textContent = '';
+    matches = 0;
+    score = 0;
+    time = 0;
+    firstCard = null;
+    lock = false;
+    scoreEl.textContent = score;
+    timerEl.textContent = time;
+
+    // Duplica e mescola le immagini
+    const deck = shuffle([...symbols, ...symbols]);
+    deck.forEach(src => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="${src}" alt="immagine" class="card-img">
+          </div>
+          <div class="card-back">❓</div>
+        </div>
+      `;
+      card.addEventListener('click', () => {
+        if (gameActive) flipCard(card, src);
+      });
+      board.appendChild(card);
+    });
+  }
+
+  function flipCard(card, src) {
+    if (lock || card.classList.contains('flipped')) return;
+    card.classList.add('flipped');
+
+    if (!firstCard) {
+      firstCard = { card, src };
+      return;
+    }
+
+    if (src === firstCard.src) {
+      score += 10;
+      matches++;
+      scoreEl.textContent = score;
+      firstCard = null;
+      if (matches === symbols.length) endGame();
+    } else {
+      lock = true;
+      setTimeout(() => {
+        card.classList.remove('flipped');
+        firstCard.card.classList.remove('flipped');
         firstCard = null;
         lock = false;
-        scoreEl.textContent = score;
-        timerEl.textContent = time;
+      }, 800);
+    }
+  }
 
-        const deck = shuffle([...symbols, ...symbols]);
-        deck.forEach(sym => {
-          const card = document.createElement('div');
-          card.className = 'card';
-          card.innerHTML = `
-        <div class="card-inner">
-          <div class="card-front">${sym}</div>
-          <div class="card-back">❓</div>
-        </div>`;
-          card.addEventListener('click', () => {
-            if (gameActive) flipCard(card, sym); // 👉 cliccabili solo se il gioco è attivo
-          });
-          board.appendChild(card);
-        });
-      }
+  function endGame() {
+    clearInterval(timer);
+    gameActive = false;
+    winEl.textContent = `🎉 Hai vinto! Tempo: ${time}s — Punteggio: ${score}`;
+  }
 
-      // FLIP DELLE CARTE
-      function flipCard(card, sym) {
-        if (lock || card.classList.contains('flipped')) return;
-        card.classList.add('flipped');
+  function startGame() {
+    if (gameActive) return;
+    gameActive = true;
+    winEl.textContent = '';
+    score = 0;
+    matches = 0;
+    time = 0;
+    scoreEl.textContent = score;
+    timerEl.textContent = time;
+    clearInterval(timer);
+    timer = setInterval(() => {
+      time++;
+      timerEl.textContent = time;
+    }, 1000);
+  }
 
-        if (!firstCard) {
-          firstCard = { card, sym };
-          return;
-        }
+  createBoard();
+  startBtn.addEventListener('click', startGame);
+})();
 
-        // seconda carta
-        if (sym === firstCard.sym) {
-          score += 10;
-          matches++;
-          scoreEl.textContent = score;
-          firstCard = null;
-          if (matches === symbols.length) endGame();
-        } else {
-          lock = true;
-          setTimeout(() => {
-            card.classList.remove('flipped');
-            firstCard.card.classList.remove('flipped');
-            firstCard = null;
-            lock = false;
-          }, 800);
-        }
-      }
-
-      // FINE GIOCO
-      function endGame() {
-        clearInterval(timer);
-        gameActive = false; // blocca di nuovo le carte
-        winEl.textContent = `🎉 Hai vinto! Tempo: ${time}s — Punteggio: ${score}`;
-      }
-
-      // FUNZIONE START: fa partire solo il timer e attiva le carte
-      function startGame() {
-        if (gameActive) return; // evita doppi click
-        gameActive = true;
-        winEl.textContent = '';
-        score = 0;
-        matches = 0;
-        time = 0;
-        scoreEl.textContent = score;
-        timerEl.textContent = time;
-        clearInterval(timer);
-        timer = setInterval(() => {
-          time++;
-          timerEl.textContent = time;
-        }, 1000);
-      }
-
-      // crea subito il board all'avvio della pagina
-      createBoard();
-
-      // start attiva il gioco
-      startBtn.addEventListener('click', startGame);
-    })();
 
   </script>
 </body>
