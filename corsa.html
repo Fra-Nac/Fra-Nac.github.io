@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚗 Gioco di Corsa Deluxe</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="jquery-3.3.1.js"></script>
+    <script src="script.js"></script>
+    <style>
+
+        :root {
+            --bg: #0f172a;
+            --road: linear-gradient(180deg, #222, #333 40%, #222);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 32px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            border: 8px double var(--accent1);
+            border-radius: 24px;
+            box-shadow: 0 0 40px var(--accent1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: lime;
+            font-size: 40px;
+            text-shadow: 2px 2px 10px magenta, 0 0 20px yellow;
+            animation: wobble 0.8s infinite alternate;
+        }
+
+        @keyframes wobble {
+            from {
+                transform: rotate(-2deg) scale(1.05);
+            }
+
+            to {
+                transform: rotate(2deg) scale(0.95);
+            }
+        }
+
+
+        .hud {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #score,
+        #highScore {
+            font-size: 20px;
+            color: #222;
+            background: #ffcc00;
+            border-radius: 10px;
+            padding: 5px 15px;
+            border: 3px solid #ff00aa;
+            box-shadow: 0 0 10px #ff00aa;
+        }
+
+        #gameArea {
+            position: relative;
+            width: 300px;
+            height: 500px;
+            background-image: url('strada.jpg');
+            background-size: cover;
+            background-repeat: repeat-y;
+            /* importante per farlo ripetere in verticale */
+            overflow: hidden;
+            border: 5px solid #ff00aa;
+            border-radius: 20px;
+            box-shadow: 0 0 30px #ff80c0;
+            margin-bottom: 21px;
+
+            animation: moveRoad 0.5s linear infinite;
+            /* aggiungi questa riga */
+        }
+
+        @keyframes moveRoad {
+            from {
+                background-position-y: 0;
+            }
+
+            to {
+                background-position-y: -100%;
+            }
+        }
+
+
+        /* AUTO */
+        .car {
+            position: absolute;
+            bottom: 20px;
+            left: 130px;
+            width: 50px;
+            height: 80px;
+            background-image: url('fiat.png');
+            background-size: contain;
+            background-position: center;
+            border-radius: 8px;
+            animation: carmove 1s infinite alternate ease-in-out;
+        }
+
+        @keyframes carmove {
+            from {
+                transform: translateY(0px);
+            }
+
+            to {
+                transform: translateY(3px);
+            }
+        }
+
+        /* OSTACOLI */
+        .obstacle {
+            position: absolute;
+            top: -60px;
+            width: 44px;
+            height: 70px;
+            background-size: contain;
+            background-position: center;
+            border-radius: 8px;
+        }
+
+        #controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 20px;
+        }
+
+        button {
+            background: linear-gradient(90deg, #ffcc00, #ff66b3);
+            border: 3px solid #ff00aa;
+            color: #222;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 15px #ff66b3;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #ff66b3, #ffcc00);
+            transform: scale(1.05);
+        }
+
+        .game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px 40px;
+            border-radius: 15px;
+            text-align: center;
+            color: #222;
+            border: 4px solid #ff00aa;
+            box-shadow: 0 0 20px #ff80c0;
+        }
+
+        .game-over h2 {
+            color: #ff00aa;
+            margin-bottom: 10px;
+        }
+
+        .main-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            background: linear-gradient(90deg, magenta, yellow, cyan);
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 4px dashed lime;
+            box-shadow: 0 0 25px hotpink;
+        }
+
+        .boss {
+            background-image: url('boss.png');
+            background-size: cover;
+            border-radius: 10px;
+            animation: bossMove 0.5s infinite alternate ease-in-out;
+        }
+
+        @keyframes bossMove {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.05);
+            }
+        }
+    </style>
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="home.html">🎈 Home</a>
+        <a href="auguri.html">🎂 Auguri</a>
+        <a href="games.html">🎮 Games</a>
+            <a href="ecommerce.html">🛒 eCommerce</a>
+
+        <a href="regali.html">🎁 Regali</a>
+        <a href="contatti.html">✨ Contatti</a>
+    </div>
+
+    <h1>🚗 Paoli Race</h1>
+    <div class="container" role="main" aria-labelledby="hubTitle">
+        <div class="controls">
+
+
+            <div class="hud">
+                <div id="score">Punteggio: 0</div>
+                <div id="highScore">Record: 0</div>
+                <div id="controls">
+                    <button id="startBtn">Inizia partita 🚀</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-container">
+        <div id="gameArea">
+            <div class="car" id="car"></div>
+        </div>
+
+
+    </div>
+
+    <script>
+        (() => {
+            const gameArea = document.getElementById('gameArea');
+            const car = document.getElementById('car');
+            const scoreDisplay = document.getElementById('score');
+            const highScoreDisplay = document.getElementById('highScore');
+            const startBtn = document.getElementById('startBtn');
+
+            let score = 0;
+            let highScore = localStorage.getItem('highScore') || 0;
+            highScoreDisplay.textContent = "Record: " + highScore;
+
+            let gameInterval;
+            let obstacleInterval;
+            let speed = 3.5;
+            let gameRunning = false;
+            let obstacles = [];
+            let timerInterval;
+            let timeLeft = 5;
+            let finalBossSpawned = false;
+
+            // Mostra timer nel punteggio
+            const timerDisplay = document.createElement('div');
+            timerDisplay.id = "timer";
+            timerDisplay.style.fontSize = "20px";
+            timerDisplay.style.color = "#222";
+            timerDisplay.style.background = "#00ffcc";
+            timerDisplay.style.padding = "5px 15px";
+            timerDisplay.style.border = "3px solid #006666";
+            timerDisplay.style.borderRadius = "10px";
+            timerDisplay.style.boxShadow = "0 0 10px #00cccc";
+            timerDisplay.textContent = "⏱ Tempo: 30s";
+            document.querySelector('.hud').appendChild(timerDisplay);
+
+            const carState = {
+                x: 130,
+                width: 50,
+                height: 80
+            };
+
+            function startGame() {
+                if (gameRunning) return;
+                gameRunning = true;
+                score = 0;
+                speed = 3.5;
+                timeLeft = 5;
+                finalBossSpawned = false;
+                obstacles.forEach(o => o.remove());
+                obstacles = [];
+                scoreDisplay.textContent = "Punteggio: 0";
+                timerDisplay.textContent = "⏱ Tempo: 30s";
+                startBtn.disabled = true;
+                startBtn.textContent = "Gioco in corso...";
+                gameInterval = requestAnimationFrame(updateGame);
+                obstacleInterval = setInterval(createObstacle, 1100);
+                timerInterval = setInterval(updateTimer, 1000);
+            }
+
+            function updateTimer() {
+                if (!gameRunning) return;
+                timeLeft--;
+                timerDisplay.textContent = `⏱ Tempo: ${timeLeft}s`;
+
+                // quando il tempo finisce, spawna il boss
+                if (timeLeft <= 0 && !finalBossSpawned) {
+                    clearInterval(obstacleInterval);
+                    spawnFinalBoss();
+                    finalBossSpawned = true;
+                    clearInterval(timerInterval);
+                }
+            }
+
+            function spawnFinalBoss() {
+                const boss = document.createElement('div');
+                boss.className = 'obstacle boss';
+                boss.style.width = "240px"; // più grande, ma non tutto il campo
+                boss.style.height = "120px";
+                boss.style.left = "30px";
+                boss.style.top = "-120px";
+                boss.style.backgroundImage = "url('memory.png')";
+                boss.style.backgroundSize = "cover";
+                boss.style.boxShadow = "0 0 30px red";
+                boss.style.border = "3px solid darkred";
+                gameArea.appendChild(boss);
+                obstacles.push(boss);
+            }
+
+            function endGame(showVideo = false) {
+                gameRunning = false;
+                cancelAnimationFrame(gameInterval);
+                clearInterval(obstacleInterval);
+                clearInterval(timerInterval);
+
+                if (score > highScore) {
+                    highScore = score;
+                    localStorage.setItem('highScore', highScore);
+                    highScoreDisplay.textContent = "Record: " + highScore;
+                }
+
+                // se è la fine normale o del boss
+                if (showVideo) {
+                    playVideoOverlay();
+                } else {
+                    const overlay = document.createElement('div');
+                    overlay.className = 'game-over';
+                    overlay.innerHTML = `
+        <h2>💥 Game Over!</h2>
+        <p>Punteggio finale: ${score}</p>
+        <p>Record: ${highScore}</p>
+        <button onclick="window.location.reload()">🔁 Riprova</button>`;
+                    gameArea.appendChild(overlay);
+                }
+            }
+            function resetGame() {
+                // ferma eventuali animazioni
+                cancelAnimationFrame(gameInterval);
+                clearInterval(obstacleInterval);
+
+                // pulizia
+                obstacles.forEach(o => o.remove());
+                obstacles = [];
+
+                // reset parametri
+                gameRunning = false;
+                score = 0;
+                speed = 3.5;
+                scoreDisplay.textContent = "Punteggio: 0";
+
+                // rimette la macchina al centro
+                carState.x = 130;
+                car.style.left = carState.x + "px";
+
+                // riattiva pulsante
+                startBtn.disabled = false;
+                startBtn.textContent = "Inizia partita 🚀";
+            }
+
+
+            function playVideoOverlay() {
+                // overlay scuro che copre tutta la pagina
+                const videoOverlay = document.createElement('div');
+                videoOverlay.style.position = "fixed";
+                videoOverlay.style.top = "0";
+                videoOverlay.style.left = "0";
+                videoOverlay.style.width = "100%";
+                videoOverlay.style.height = "100%";
+                videoOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.9)";
+                videoOverlay.style.display = "flex";
+                videoOverlay.style.alignItems = "center";
+                videoOverlay.style.justifyContent = "center";
+                videoOverlay.style.zIndex = "9999";
+                videoOverlay.style.flexDirection = "column";
+
+                // contenitore del player con proporzione 16:9
+                const videoContainer = document.createElement('div');
+                videoContainer.style.position = "relative";
+                videoContainer.style.width = "960px";   // fissa 16:9
+                videoContainer.style.height = "540px";
+                videoContainer.style.border = "5px solid magenta";
+                videoContainer.style.borderRadius = "20px";
+                videoContainer.style.boxShadow = "0 0 40px lime";
+                videoContainer.style.overflow = "hidden";
+                videoContainer.style.background = "#000";
+
+                // elemento video
+                const video = document.createElement('video');
+                video.src = "mm.mp4"; // <-- metti qui il tuo file video
+                video.controls = true;
+                video.autoplay = true;
+                video.style.width = "100%";
+                video.style.height = "100%";
+                video.style.display = "block";
+                videoContainer.appendChild(video);
+
+                // pulsante chiudi
+                const closeBtn = document.createElement('button');
+                closeBtn.textContent = "✖️ Chiudi";
+                closeBtn.style.position = "absolute";
+                closeBtn.style.top = "10px";
+                closeBtn.style.right = "10px";
+                closeBtn.style.background = "rgba(255, 0, 150, 0.9)";
+                closeBtn.style.color = "white";
+                closeBtn.style.border = "none";
+                closeBtn.style.padding = "8px 16px";
+                closeBtn.style.fontSize = "16px";
+                closeBtn.style.fontWeight = "bold";
+                closeBtn.style.borderRadius = "8px";
+                closeBtn.style.cursor = "pointer";
+                closeBtn.style.boxShadow = "0 0 15px magenta";
+                closeBtn.onmouseenter = () => (closeBtn.style.background = "rgba(255, 100, 200, 1)");
+                closeBtn.onmouseleave = () => (closeBtn.style.background = "rgba(255, 0, 150, 0.9)");
+
+                // azione di chiusura
+                closeBtn.onclick = () => {
+                    video.pause();
+                    videoOverlay.remove();
+                };
+
+                videoContainer.appendChild(closeBtn);
+                videoOverlay.appendChild(videoContainer);
+                document.body.appendChild(videoOverlay);
+            }
+
+
+            function createObstacle() {
+                const obstacle = document.createElement('div');
+                obstacle.className = 'obstacle';
+                const images = ['car1.png', 'car2.png', 'car3.png', 'car4.png'];
+                const randomImage = images[Math.floor(Math.random() * images.length)];
+                obstacle.style.backgroundImage = `url('${randomImage}')`;
+                obstacle.style.left = `${Math.floor(Math.random() * 250)}px`;
+                gameArea.appendChild(obstacle);
+                obstacles.push(obstacle);
+            }
+
+            function updateGame() {
+                if (!gameRunning) return;
+
+                obstacles.forEach((obstacle, i) => {
+                    let top = parseInt(obstacle.style.top || '-60');
+                    obstacle.style.top = top + speed + 'px';
+
+                    // boss scende più lentamente
+                    if (obstacle.classList.contains('boss')) {
+                        obstacle.style.top = top + 2 + 'px';
+                    }
+
+                    if (top > 500) {
+                        obstacle.remove();
+                        obstacles.splice(i, 1);
+                        if (!obstacle.classList.contains('boss')) {
+                            score++;
+                            scoreDisplay.textContent = "Punteggio: " + score;
+                            if (score % 10 === 0) speed += 0.3;
+                        }
+                    }
+
+                    // Collisione
+                    const carRect = car.getBoundingClientRect();
+                    const obsRect = obstacle.getBoundingClientRect();
+                    if (
+                        obsRect.bottom > carRect.top + 10 &&
+                        obsRect.top < carRect.bottom &&
+                        obsRect.right > carRect.left + 5 &&
+                        obsRect.left < carRect.right - 5
+                    ) {
+                        // Se l'ostacolo è quello finale...
+                        if (obstacle.classList.contains('boss')) {
+                            gameRunning = false;
+                            cancelAnimationFrame(gameInterval);
+                            clearInterval(obstacleInterval);
+                            playVideoOverlay(); // mostra il video
+                            resetGame();
+                        } else {
+                            endGame(); // ostacoli normali -> Game Over classico
+                        }
+                    }
+
+                });
+                gameInterval = requestAnimationFrame(updateGame);
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (!gameRunning) return;
+                const move = 25;
+                if (e.key === 'ArrowLeft' && carState.x > 0) {
+                    carState.x -= move;
+                    car.style.left = carState.x + 'px';
+                } else if (e.key === 'ArrowRight' && carState.x < 250) {
+                    carState.x += move;
+                    car.style.left = carState.x + 'px';
+                }
+            });
+
+            startBtn.addEventListener('click', () => {
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                setTimeout(startGame, 600);
+            });
+        })();
+    </script>
+
+
+
+</body>
+
+</html>

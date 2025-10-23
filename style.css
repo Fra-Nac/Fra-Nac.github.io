@@ -1,165 +1,172 @@
-    body {
-      margin: 0;
-      overflow-x: hidden;
-      font-family: "Comic Sans MS", cursive;
-      background: linear-gradient(45deg, hotpink, yellow, cyan, lime, orange);
-      background-size: 400% 400%;
-      animation: bgMove 5s infinite alternate ease-in-out;
-      cursor: crosshair;
-    }
+body {
+  margin: 0;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, magenta, yellow, cyan, lime);
+  background-size: 400% 400%;
+  animation: bgMove 6s infinite linear;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  color: var(--text);
+  overflow-x: hidden;
+}
 
-    @keyframes bgMove {
-      0% {
-        background-position: 0 0;
-      }
+@keyframes bgMove {
+  0% {
+    background-position: 0% 0%;
+  }
 
-      100% {
-        background-position: 100% 100%;
-      }
-    }
+  50% {
+    background-position: 100% 100%;
+  }
 
-    /* NAVBAR */
-    .navbar {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      background: linear-gradient(to right, lime, fuchsia, cyan);
-      padding: 10px;
-      border-bottom: 5px dashed yellow;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 0 30px magenta;
-    }
-
-    .navbar a {
-      font-size: 1.2em;
-      background: linear-gradient(90deg, red, yellow, lime, cyan);
-      border: 3px solid purple;
-      border-radius: 10px;
-      color: black;
-      padding: 10px 20px;
-      font-weight: bold;
-      cursor: pointer;
-      text-shadow: 1px 1px 2px white;
-      animation: pulse 1s infinite alternate;
-      text-decoration: none;
-    }
+  100% {
+    background-position: 0% 0%;
+  }
+}
 
 
-    @keyframes pulse {
-      0% {
-        transform: scale(1);
-      }
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: linear-gradient(to right, lime, fuchsia, cyan);
+  padding: 10px;
+  border-bottom: 5px dashed yellow;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 0 30px magenta;
+}
 
-      100% {
-        transform: scale(1.2);
-      }
-    }
-
-    /* HERO SECTION */
-    .hero {
-      text-align: center;
-      padding: 0px 20px;
-      color: white;
-      text-shadow: 3px 3px 10px black;
-      animation: rainbowText 2s infinite alternate;
-    }
-
-    @keyframes rainbowText {
-      0% {
-        color: red;
-      }
-
-      25% {
-        color: yellow;
-      }
-
-      50% {
-        color: lime;
-      }
-
-      75% {
-        color: cyan;
-      }
-
-      100% {
-        color: magenta;
-      }
-    }
-
-    /* RIQUADRI */
-    .cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 70px;
-      overflow: hidden;
-    }
-
-    .card {
-      width: 250px;
-      height: 200px;
-      background: repeating-linear-gradient(45deg, magenta, magenta 10px, yellow 10px, yellow 20px);
-      border-radius: 20px;
-      box-shadow: 0 0 30px cyan;
-      color: black;
-      font-weight: bold;
-      text-align: center;
-      padding: 0px;
-      animation: spin 3s infinite linear;
-    }
-
-    .card img {
-      width: 250px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 5%;
-      border: 3px solid white;
-      box-shadow: 0 0 15px magenta;
-    }
+.navbar a {
+  font-size: 1.2em;
+  background: linear-gradient(90deg, red, yellow, lime, cyan);
+  border: 3px solid purple;
+  border-radius: 10px;
+  color: black;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  text-shadow: 1px 1px 2px white;
+  animation: pulse 1s infinite alternate;
+  text-decoration: none;
+}
 
 
-    @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
 
-      to {
-        transform: rotate(360deg);
-      }
-    }
+  100% {
+    transform: scale(1.2);
+  }
+}
 
-    /* PARTICELLE BRILLANTI */
-    .sparkle {
-      position: fixed;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: white;
-      pointer-events: none;
-      box-shadow: 0 0 10px white, 0 0 20px fuchsia, 0 0 30px yellow;
-      animation: fade 1s forwards;
-    }
+/* HERO SECTION */
+.hero {
+  text-align: center;
+  padding: 0px 20px;
+  color: white;
+  text-shadow: 3px 3px 10px black;
+  animation: rainbowText 2s infinite alternate;
+}
 
-    @keyframes fade {
-      to {
-        transform: translateY(-20px) scale(0);
-        opacity: 0;
-      }
-    }
+@keyframes rainbowText {
+  0% {
+    color: red;
+  }
 
-    /* TESTO SCORRENTE */
-    marquee {
-      font-size: 2em;
-      background: black;
-      color: lime;
-      padding: 10px;
-      font-weight: bold;
-    }
+  25% {
+    color: yellow;
+  }
 
-    .map-zoom-container {
+  50% {
+    color: lime;
+  }
+
+  75% {
+    color: cyan;
+  }
+
+  100% {
+    color: magenta;
+  }
+}
+
+/* RIQUADRI */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 70px;
+  overflow: hidden;
+}
+
+.card {
+  width: 250px;
+  height: 200px;
+  background: repeating-linear-gradient(45deg, magenta, magenta 10px, yellow 10px, yellow 20px);
+  border-radius: 20px;
+  box-shadow: 0 0 30px cyan;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  padding: 0px;
+  animation: spin 3s infinite linear;
+}
+
+.card img {
+  width: 250px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5%;
+  border: 3px solid white;
+  box-shadow: 0 0 15px magenta;
+}
+
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.sparkle {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: white;
+  box-shadow: 0 0 10px white, 0 0 20px magenta, 0 0 30px yellow;
+  animation: fade 1s forwards;
+}
+
+@keyframes fade {
+  to {
+    transform: translateY(-20px) scale(0);
+    opacity: 0;
+  }
+}
+
+/* TESTO SCORRENTE */
+marquee {
+  font-size: 2em;
+  background: black;
+  color: lime;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.map-zoom-container {
   display: flex;
   justify-content: center;
   margin-top: 30px;
@@ -181,10 +188,12 @@
     transform: scale(0.1) rotateX(60deg);
     opacity: 0;
   }
+
   50% {
     transform: scale(1.2) rotateX(30deg);
     opacity: 1;
   }
+
   100% {
     transform: scale(1) rotateX(0deg);
   }

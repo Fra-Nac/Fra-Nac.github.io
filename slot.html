@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slot Machine JS</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .slot {
+  
+ display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  color: gold;
+  text-shadow: 0 0 10px red;
+}
+
+.slot-machine {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.reel {
+  background: black;
+  border: 3px solid gold;
+  border-radius: 10px;
+  width: 80px;
+  height: 80px;
+  margin: 0 10px;
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s;
+}
+
+button {
+  background: gold;
+  color: black;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 25px;
+  cursor: pointer;
+  box-shadow: 0 0 10px gold;
+  transition: transform 0.2s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+#message {
+  font-size: 24px;
+  margin-top: 20px;
+  color: lightgreen;
+  text-shadow: 0 0 5px green;
+}
+.reel {
+  background: black;
+  border: 3px solid gold;
+  border-radius: 10px;
+  width: 100px;
+  height: 100px;
+  margin: 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s;
+}
+
+.reel img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  transition: transform 0.1s;
+}
+
+.reel img.spin {
+  transform: translateY(10px);
+}
+
+
+  </style>
+</head>
+<body>
+<div class="navbar">
+    <a href="home.html">🎈 Home</a>
+    <a href="auguri.html">🎂 Auguri</a>
+    <a href="games.html">🎮 Games</a>
+        <a href="ecommerce.html">🛒 eCommerce</a>
+    <a href="regali.html">🎁 Regali</a>
+    <a href="contatti.html">✨ Contatti</a>
+  </div>
+  <div class="slot">
+  <h1>🎰 Slot Machine 🎰</h1>
+
+  <div class="slot-machine">
+  <div class="reel"><img id="reel1" src="img/funko2.png" alt="cherry"></div>
+  <div class="reel"><img id="reel2" src="img/funko3.png" alt="lemon"></div>
+  <div class="reel"><img id="reel3" src="img/funko1.png" alt="grape"></div>
+</div>
+
+
+  <button id="spinButton">Gira!</button>
+
+  <p id="message"></p>
+</div>
+  <script>
+    const symbols = [
+  "img/funko1.png",
+  "img/funko2.png",
+  "img/funko3.png",
+  "img/maglia2.png",
+  "img/peluche1.png"
+];
+
+const reels = [
+  document.getElementById("reel1"),
+  document.getElementById("reel2"),
+  document.getElementById("reel3")
+];
+
+const message = document.getElementById("message");
+const spinButton = document.getElementById("spinButton");
+
+spinButton.addEventListener("click", spin);
+
+function spin() {
+  spinButton.disabled = true;
+  message.textContent = "🎲 Girando...";
+
+  // Numero di "frame" di animazione
+  let spins = [20, 30, 40]; // Ogni rullo gira per un tempo diverso
+
+  // Variabili per salvare l'intervallo di ogni rullo
+  const intervals = [];
+
+  // Avvia i tre rulli
+  for (let i = 0; i < reels.length; i++) {
+    intervals[i] = setInterval(() => {
+      reels[i].src = getRandomSymbol();
+    }, 100); // ogni 100ms cambia immagine
+    reels[i].classList.add("spin");
+setTimeout(() => reels[i].classList.remove("spin"), 80);
+
+  }
+
+  // Ferma i rulli uno alla volta
+  setTimeout(() => stopReel(0, intervals, spins), 1000);
+  setTimeout(() => stopReel(1, intervals, spins), 1500);
+  setTimeout(() => stopReel(2, intervals, spins), 2000);
+}
+
+// Ferma un rullo e controlla se è finito il giro
+function stopReel(index, intervals, spins) {
+  clearInterval(intervals[index]);
+
+  // Mostra il simbolo finale
+  const finalSymbol = getRandomSymbol();
+  reels[index].src = finalSymbol;
+  spins[index] = finalSymbol;
+
+  // Quando tutti i rulli sono fermi, controlla il risultato
+  if (spins.every(s => typeof s === "string")) {
+    checkResult(spins);
+    spinButton.disabled = false;
+  }
+}
+
+// Controlla se hai vinto
+function checkResult(spins) {
+  const [s1, s2, s3] = spins;
+  if (s1 === s2 && s2 === s3) {
+    message.textContent = "🎉 JACKPOT! Hai vinto! 🎉";
+  } else if (s1 === s2 || s2 === s3 || s1 === s3) {
+    message.textContent = "😉 Due simboli uguali!";
+  } else {
+    message.textContent = "😢 Ritenta!";
+  }
+}
+
+function getRandomSymbol() {
+  const index = Math.floor(Math.random() * symbols.length);
+  return symbols[index];
+}
+
+
+  </script>
+</body>
+</html>

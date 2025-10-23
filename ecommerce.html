@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BruttoE-Shop 🎉</title>
+  <style>
+    /* Estetica volutamente brutta e super colorata */
+    :root {
+      --bg1: #ff2d95;
+      --bg2: #ffd300;
+      --bg3: #00ff66;
+      --accent: #00bfff;
+      --muted: #111;
+    }
+
+    select {
+      background: linear-gradient(90deg, #ff2d95, #ffd300);
+      color: #111;
+      font-weight: bold;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Comic Sans MS', 'Trebuchet MS', Arial, sans-serif;
+      color: var(--muted)
+    }
+
+    body {
+      background: linear-gradient(45deg, var(--bg1), var(--bg2));
+    }
+
+    header {
+      padding: 18px;
+      background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.15) 0 10px, rgba(0, 0, 0, 0.05) 10px 20px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .logo {
+      font-size: 28px;
+      padding: 8px 12px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #fff, #ff9);
+      box-shadow: 0 6px 0 rgba(0, 0, 0, .15);
+      transform: rotate(-6deg)
+    }
+
+    nav a {
+      margin: 0 8px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      background: var(--accent);
+      color: white
+    }
+
+    main {
+      padding: 24px;
+    }
+
+    .hero {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      padding: 18px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02));
+      border-radius: 16px
+    }
+
+    .hero .title {
+      font-size: 32px;
+      color: #3b0b7b;
+      text-shadow: 2px 2px 0 #fff;
+      padding: 8px
+    }
+
+    .search {
+      margin-left: auto
+    }
+
+    .search input {
+      padding: 8px;
+      border-radius: 8px;
+      border: 4px solid #fff;
+      outline: none
+    }
+
+    /* Grid prodotti - volutamente disordinato */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 18px;
+      margin-top: 20px
+    }
+
+    .card {
+      background: linear-gradient(180deg, #fff, #ffeedd);
+      padding: 12px;
+      border-radius: 12px;
+      border: 6px solid #ff8aa3;
+      box-shadow: 5px 8px 0 rgba(0, 0, 0, 0.12);
+      transform: rotate(-2deg)
+    }
+
+    .card h3 {
+      margin: 8px 0 4px;
+      font-size: 18px
+    }
+
+    .price {
+      font-weight: 900;
+      color: #0b3;
+    }
+
+    .thumb {
+      height: 180px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700
+    }
+
+    .thumb img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 6px
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      background: #2d0cff;
+      color: white;
+      font-weight: 700;
+      margin-top: 8px
+    }
+
+    /* Pagina prodotto */
+    .product-page {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    /* Immagine più piccola e centrata */
+    .big-image {
+      flex: 0 0 280px;
+      border: 6px solid #00ff66;
+      padding: 10px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #fff, #fff7e0);
+      text-align: center;
+    }
+
+    .big-image .img {
+      height: 300px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .big-image img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 8px;
+    }
+
+    /* Commenti e correlati spostati sotto immagine */
+    .image-extras {
+      margin-top: 16px;
+      background: linear-gradient(180deg, #fff, #fef3ff);
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    /* Aspetto dei correlati e dei commenti migliorato un po’ */
+    .related {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px
+    }
+
+    .related .mini {
+      flex: 1 1 150px;
+      padding: 8px;
+      border-radius: 8px;
+      background: linear-gradient(180deg, #fff7, #ffd);
+      text-align: center
+    }
+
+    .comment {
+      padding: 10px;
+      border-radius: 8px;
+      background: #fff9;
+      border: 2px dashed #0006;
+      margin-bottom: 8px
+    }
+
+    .product-info {
+      flex: 1
+    }
+
+    .product-info h1 {
+      margin-top: 0;
+      font-size: 32px
+    }
+
+    .buy {
+      display: flex;
+      gap: 12px;
+      align-items: center
+    }
+
+    .add-to-cart {
+      padding: 12px 18px;
+      background: #ff4b00;
+      color: white;
+      border-radius: 12px;
+      font-weight: 900;
+      border: 4px solid #fff
+    }
+
+    .meta {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #ffe1ff, #fff)
+    }
+
+    /* Comments */
+    .comments {
+      margin-top: 18px
+    }
+
+    .comment {
+      padding: 10px;
+      border-radius: 8px;
+      background: #fff3;
+      border: 3px dashed #0006;
+      margin-bottom: 8px
+    }
+
+    .comment small {
+      display: block;
+      opacity: .8
+    }
+
+    .comment-form textarea {
+      width: 100%;
+      height: 80px
+    }
+
+    .related {
+      display: inline-flex;
+      gap: 12px;
+      margin-top: 18px
+    }
+
+    .related .mini {
+      flex: 1;
+      padding: 8px;
+      border-radius: 8px;
+      background: linear-gradient(180deg, #fff7, #ffd);
+      text-align: center
+    }
+
+    footer {
+      margin-top: 30px;
+      padding: 18px;
+      text-align: center;
+      color: #fff;
+      font-weight: 700
+    }
+
+    /* Mobile styles */
+    @media (max-width:900px) {
+      .product-page {
+        flex-direction: column
+      }
+
+      .big-image {
+        flex: unset
+      }
+    }
+
+    /* --- Bottoni taglie in stile Amazon --- */
+    .size-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-left: 10px;
+    }
+
+    .size-btn {
+      padding: 8px 14px;
+      border: 2px solid #333;
+      border-radius: 8px;
+      background: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .size-btn:hover {
+      background: #eee;
+    }
+
+    .size-btn.selected {
+      border: 3px solid #00bfff;
+      background: #e0f7ff;
+    }
+
+    /* --- Popup immagine grande --- */
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .popup-content {
+      position: relative;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+
+      /* 🔥 Nessuna dimensione fissa: si adatta al contenuto */
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 90vw;
+      /* Limite di sicurezza: mai oltre il 90% della finestra */
+      max-height: 90vh;
+    }
+
+    .popup-content img {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 90vw;
+      /* Anche l’immagine rispetta i limiti */
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    /* Pulsante di chiusura */
+    .popup-close {
+      position: absolute;
+      top: 6px;
+      right: 10px;
+      font-size: 30px;
+      font-weight: bold;
+      color: #000;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      text-align: center;
+      line-height: 34px;
+      transition: background 0.2s ease;
+    }
+
+    .popup-close:hover {
+      background: rgba(255, 80, 80, 0.95);
+      color: white;
+    }
+
+    .popup-content {
+      animation: popup-zoom 0.25s ease;
+    }
+
+    @keyframes popup-zoom {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* --- Bottone "Aggiungi al carrello" migliorato --- */
+    .add-to-cart {
+      padding: 12px 20px;
+      background: linear-gradient(90deg, #ff4b00, #ff6f00);
+      color: white;
+      border-radius: 12px;
+      font-weight: 900;
+      border: 3px solid #fff;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.3s ease, box-shadow 0.2s ease;
+    }
+
+    .add-to-cart:hover {
+      background: linear-gradient(90deg, #ff6f00, #ffa500);
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #ffb700;
+    }
+
+    .add-to-cart:active {
+      transform: scale(0.95);
+      background: linear-gradient(90deg, #e63e00, #ff5a00);
+    }
+
+    /* --- Toast di conferma carrello --- */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease, bottom 0.5s ease;
+      z-index: 2000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      bottom: 60px;
+    }
+
+    #mainImage img {
+      transition: opacity 0.3s ease;
+    }
+
+    #mainImage img.fade-out {
+      opacity: 0;
+    }
+
+    .back-bar {
+      text-align: center;
+      margin: 10px 0;
+    }
+
+    .btn-back {
+      background: linear-gradient(90deg, #00bfff, #00ff66);
+      color: #111;
+      font-weight: 900;
+      border: 3px solid #fff;
+      border-radius: 10px;
+      padding: 10px 18px;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+      transition: transform 0.15s ease, background 0.3s ease;
+    }
+
+    .btn-back:hover {
+      transform: scale(1.05);
+      background: linear-gradient(90deg, #00ffcc, #00ff99);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">BRUTTO-eShop</div>
+
+    <nav>
+      <a href="#/">Home</a>
+      <a href="#/category/gadgets">Gadgets</a>
+      <a href="#/category/vestiti">Vestiti</a>
+      <a href="#/cart">Carrello</a>
+    </nav>
+    <div class="back-bar">
+      <button id="goBackBtn" class="btn-back">⬅️ Torna al sito principale</button>
+    </div>
+
+  </header>
+  <main id="app">
+    <!-- Render dinamico qui -->
+  </main>
+  <footer>Progetto scherzo — look volutamente orrendo 🌈🧨</footer>
+
+  <script>
+
+    // Dati dei prodotti (client-only)
+    const PRODUCTS = [
+      {
+        id: 'p1', title: 'Cuscino Fuoco Totale', price: '19.99€', category: 'home', desc: 'Un cuscino con colori che incredibile. Ideale per appoggiarci il culo sopra.',
+        imageUrl: 'img/cuscino1black.png', variants: {
+          Nero: 'img/cuscino1black.png',
+          Rosso: 'img/cuscino1red.png',
+          Blu: 'img/cuscino1blue.png'
+        }, sizes: ['Nero', 'Rosso', 'Blu'], related: ['p2', 'p3'], comments: [{ user: 'Luca', text: 'Mi ha folgorato! Lo uso sempre quando ho le emorroidi, è comodissimo.', date: '2025-10-01' }]
+      },
+      {
+        id: 'p2', title: 'Maglia Incredibile Ninuzza Limited Edition', price: '29.90€', category: 'home', desc: 'Lampada che cambia colore ogni secondo. Fastidiosa ma bella.',
+        imageUrl: 'img/maglia1.jpeg', sizes: ['S', 'M', 'L'], related: ['p1', 'p4'], comments: []
+      },
+      {
+        id: 'p3', title: 'Tazza Buongiornissimo', price: '9.50€', category: 'kitchen', desc: 'Tazza che ti urla dentro (metaforicamente). Perfetta per caffeina e drammi mattutini.',
+        imageUrl: 'img/tazza1.jpeg', sizes: ['S', 'M', 'L'], related: ['p1'], comments: [{ user: 'Anna', text: 'La uso ogni mattina, i miei vicini sono preoccupati.', date: '2025-09-20' }]
+      },
+      {
+        id: 'p4', title: 'Peluche Antonietta', price: '12.00€', category: 'gadgets', desc: 'Occhiali con lenti specchiate che riflettono male.',
+        imageUrl: 'img/peluche1.png', sizes: ['S', 'M', 'L'], related: ['p2'], comments: []
+      },
+      {
+        id: 'p5', title: 'Felpa Swag Gags', price: '14.40€', category: 'clown', desc: 'Cappello a cipolla con pompon gigante. Ridicolo e resistente.',
+        imageUrl: 'img/maglia2.png', sizes: ['S', 'M', 'L'], related: ['p3'], comments: [{ user: 'Bea', text: 'Rido ancora quando lo indosso.', date: '2025-08-15' }]
+      },
+      {
+        id: 'p6', title: 'Felpa Swag Gags', price: '14.40€', category: 'clown', desc: 'Cappello a cipolla con pompon gigante. Ridicolo e resistente.',
+        imageUrl: 'img/maglia2.png', sizes: ['S', 'M', 'L'], related: ['p3'], comments: [{ user: 'Bea', text: 'Rido ancora quando lo indosso.', date: '2025-08-15' }]
+      }
+    ];
+
+    // Funzione per creare data URI SVG (piccoli "immagini")
+    function makeSVG(text, bg, accent) {
+      const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'>
+        <defs>
+          <linearGradient id='g' x1='0' x2='1' y1='0' y2='1'>
+            <stop offset='0' stop-color='${bg}' />
+            <stop offset='1' stop-color='${accent}' />
+          </linearGradient>
+        </defs>
+        <rect width='100%' height='100%' fill='url(#g)' />
+        <g font-family='Comic Sans MS, Arial' font-size='64' fill='#fff' opacity='0.95'>
+          <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle'>${escapeHtml(text)}</text>
+        </g>
+      </svg>`;
+      return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    }
+
+    function escapeHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+    // Routing basato su hash
+    function router() {
+      const hash = location.hash || '#/';
+      const app = document.getElementById('app');
+      if (hash === '#/' || /^#\/category\//.test(hash)) {
+        const match = hash.match(/^#\/category\/(.+)$/);
+        const cat = match ? match[1] : null;
+        renderHome(app, cat);
+      } else if (hash.startsWith('#/product/')) {
+        const id = hash.replace('#/product/', '');
+        const prod = PRODUCTS.find(p => p.id === id);
+        if (prod) renderProduct(app, prod); else renderNotFound(app);
+      } else if (hash === '#/cart') {
+        renderCart(app);
+      } else renderNotFound(app);
+    }
+
+    // Render Home
+    function renderHome(el, category) {
+      const prods = category ? PRODUCTS.filter(p => p.category === category) : PRODUCTS;
+      el.innerHTML = `
+        <section class="hero">
+          <div class="title">Benvenuti su <strong>BRUTTO-eShop</strong> — il peggio del bello</div>
+          <div class="search"><input id="q" placeholder="Cerca... (prova 'Tazza')"></div>
+        </section>
+        <section class="grid" id="grid"></section>
+      `;
+      const grid = document.getElementById('grid');
+      const queryInput = document.getElementById('q');
+      function draw(list) {
+        grid.innerHTML = '';
+        list.forEach(p => {
+          const card = document.createElement('article'); card.className = 'card';
+          card.innerHTML = `
+<div class="thumb" style="background:#fff">
+  <img src="${p.imageUrl}" alt="${p.title}">
+</div>
+            <h3>${p.title}</h3>
+            <div class="price">${p.price}</div>
+            <div>${p.desc}</div>
+            <a class="btn" href="#/product/${p.id}">Vedi prodotto</a>
+          `;
+          grid.appendChild(card);
+        });
+      }
+      draw(prods);
+      queryInput.addEventListener('input', () => {
+        const q = queryInput.value.toLowerCase();
+        draw(prods.filter(p => p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)));
+      });
+    }
+
+    // Render product
+    function renderProduct(el, p) {
+      el.innerHTML = `
+  <div class="product-page">
+    <div class="big-image">
+      <div class="img" id="mainImage">
+        <img src="${p.imageUrl}" alt="${p.title}">
+      </div>
+    </div>
+        
+    <div class="product-info">
+      <h1>${p.title}</h1>
+      <div class="buy">
+        <div style="font-size:28px;font-weight:900;color:#e60073">${p.price}</div>
+        ${p.sizes && p.sizes.length > 0 ? `
+          <div id="sizeButtons" class="size-buttons">
+            ${p.sizes.map(s => `<button class="size-btn" data-size="${s}">${s}</button>`).join('')}
+          </div>
+        ` : ''}
+        <button class="add-to-cart" id="addToCart">Aggiungi al carrello</button>
+      </div>
+
+      <div class="meta">
+        <strong>Descrizione</strong>
+        <p>${p.desc}</p>
+        <strong>Categoria:</strong> ${p.category}
+      </div>
+    </div>
+  </div>
+  <div class="image-extras">
+        <h3>Commenti</h3>
+            <div class="comments" id="comments-root">
+            <div id="comments-list"></div>
+            <div class="comment-form">
+                <input id="comment-user" placeholder="Nome" style="padding:6px;border-radius:6px;border:3px solid #000;margin-top:8px;">
+                <textarea id="comment-text" placeholder="Scrivi un commento..."></textarea>
+                <button id="post-comment" class="btn">Pubblica commento</button>
+            </div>
+        </div>
+
+        <h3>Prodotti correlati</h3>
+        <div class="related" id="related-root"></div>
+    </div>
+
+    <!-- Popup immagine -->
+    <div id="imgPopup" class="popup-overlay" style="display:none;">
+      <div class="popup-content">
+        <span id="closePopup" class="popup-close">&times;</span>
+        <img id="popupImg" src="${p.imageUrl}" alt="${p.title}">
+      </div>
+    </div>
+`;
+
+      // --- Gestione TAGLIE tipo Amazon ---
+      let selectedSize = '';
+      const sizeButtons = document.querySelectorAll('.size-btn');
+      sizeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          sizeButtons.forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          selectedSize = btn.dataset.size;
+
+          // --- 🔥 Cambio immagine dinamico ---
+          const mainImage = document.querySelector('#mainImage img');
+          mainImage.classList.add('fade-out');
+          setTimeout(() => {
+            mainImage.src = p.variants[selectedSize] || p.imageUrl;
+            mainImage.classList.remove('fade-out');
+          }, 200);
+
+          if (p.variants && p.variants[selectedSize]) {
+            mainImage.src = p.variants[selectedSize];
+          } else {
+            // Se non esiste una variante specifica, torna all’immagine base
+            mainImage.src = p.imageUrl;
+          }
+        });
+      });
+
+      function showToast(message) {
+        let toast = document.querySelector('.toast');
+        if (!toast) {
+          toast = document.createElement('div');
+          toast.className = 'toast';
+          document.body.appendChild(toast);
+        }
+        toast.textContent = message;
+        toast.classList.add('show');
+
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2500);
+      }
+
+      // --- Gestione Commenti ---
+      const commentsList = document.getElementById('comments-list');
+      function drawComments() {
+        commentsList.innerHTML = '';
+        (p.comments || []).slice().reverse().forEach(c => {
+          const d = document.createElement('div'); d.className = 'comment';
+          d.innerHTML = `<strong>${escapeHtml(c.user)}</strong> <small>${c.date}</small><div>${escapeHtml(c.text)}</div>`;
+          commentsList.appendChild(d);
+        });
+      }
+      drawComments();
+
+      document.getElementById('post-comment').addEventListener('click', () => {
+        const user = document.getElementById('comment-user').value.trim() || 'Anonimo';
+        const text = document.getElementById('comment-text').value.trim();
+        if (!text) return alert('Scrivi qualcosa prima!');
+        p.comments = p.comments || [];
+        p.comments.push({ user, text, date: new Date().toISOString().slice(0, 10) });
+        document.getElementById('comment-text').value = '';
+        document.getElementById('comment-user').value = '';
+        drawComments();
+      });
+
+      // --- Aggiungi al carrello ---
+      // --- Aggiungi al carrello (con toast) ---
+      document.getElementById('addToCart').addEventListener('click', () => {
+        const cart = JSON.parse(localStorage.getItem('brutto_cart') || '[]');
+        if (p.sizes && p.sizes.length > 0 && !selectedSize) {
+          showToast('⚠️ Seleziona una taglia prima di aggiungere al carrello!');
+          return;
+        }
+
+        cart.push({ id: p.id, title: p.title, price: p.price, size: selectedSize });
+        localStorage.setItem('brutto_cart', JSON.stringify(cart));
+
+        showToast('✅ Prodotto aggiunto al carrello!');
+      });
+
+
+      // --- Gestione Prodotti correlati ---
+      const relRoot = document.getElementById('related-root');
+      relRoot.innerHTML = '';
+      const rel = (p.related || []).map(id => PRODUCTS.find(x => x.id === id)).filter(Boolean);
+      rel.forEach(r => {
+        const m = document.createElement('div'); m.className = 'mini';
+        m.innerHTML = `<img src="${r.imageUrl}" alt="${r.title}" style="max-width:100%;height:120px"><div style="font-weight:800">${r.title}</div><div>${r.price}</div><a href="#/product/${r.id}" class="btn">Vedi</a>`;
+        relRoot.appendChild(m);
+      });
+
+      // --- Gestione popup immagine ---
+      const popup = document.getElementById('imgPopup');
+      const popupImg = document.getElementById('popupImg');
+      const closePopup = document.getElementById('closePopup');
+      document.getElementById('mainImage').addEventListener('click', () => {
+        popup.style.display = 'flex';
+        popupImg.src = p.imageUrl;
+      });
+      closePopup.addEventListener('click', () => popup.style.display = 'none');
+      popup.addEventListener('click', (e) => {
+        if (e.target === popup) popup.style.display = 'none';
+      });
+    }
+
+    function renderCart(el) {
+      const cart = JSON.parse(localStorage.getItem('brutto_cart') || '[]');
+      el.innerHTML = `<h2>Carrello</h2><div id="cart-list"></div><div style="margin-top:12px"><button id="clear" class="btn">Svuota carrello</button></div>`;
+      const list = document.getElementById('cart-list');
+      function draw() {
+        list.innerHTML = '';
+        if (cart.length === 0) list.innerHTML = '<em>Il carrello è vuoto (ovviamente)</em>';
+        cart.forEach((c, i) => {
+          const d = document.createElement('div'); d.className = 'card'; d.style.transform = 'rotate(1deg)';
+          d.innerHTML = `
+  <strong>${escapeHtml(c.title)}</strong>
+  <div>${c.price}</div>
+  ${c.size ? `<div>Taglia: <strong>${escapeHtml(c.size)}</strong></div>` : ''}
+  <button data-i='${i}' class='btn remove'>Rimuovi</button>
+`;
+          list.appendChild(d);
+        });
+        document.querySelectorAll('.remove').forEach(btn => btn.addEventListener('click', e => {
+          const i = +e.currentTarget.dataset.i; cart.splice(i, 1); localStorage.setItem('brutto_cart', JSON.stringify(cart)); draw();
+        }));
+      }
+      document.getElementById('clear').addEventListener('click', () => { if (confirm('Sicuro?')) { localStorage.removeItem('brutto_cart'); location.hash = '#/'; } });
+      draw();
+    }
+
+    function renderNotFound(el) { el.innerHTML = '<h2>404 — Non trovato (ma almeno è colorato)</h2><p><a href="#/">Torna alla home</a></p>'; }
+
+    window.addEventListener('hashchange', router);
+    window.addEventListener('load', () => { router(); });
+    // --- Bottone "Torna al sito principale" ---
+    document.addEventListener('DOMContentLoaded', () => {
+      const backBtn = document.getElementById('goBackBtn');
+      if (backBtn) {
+        backBtn.addEventListener('click', () => {
+          // Se l’utente ha una pagina precedente nella cronologia
+          if (document.referrer && document.referrer !== window.location.href) {
+            window.history.back();
+          } else {
+            // Altrimenti torna a un link specifico (metti qui il tuo sito vero)
+            window.location.href = "https://iltuosito.it";
+          }
+        });
+      }
+    });
+
+  </script>
+</body>
+
+</html>

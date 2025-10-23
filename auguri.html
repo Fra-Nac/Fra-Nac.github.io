@@ -5,11 +5,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🎂 Auguri!</title>
   <link rel="stylesheet" href="style.css">
+  <script type="text/javascript" src="jquery-3.3.1.js"></script>
+  <script src="script.js"></script>
+  <style>
+    /* --- GALLERIA ARTISTICA --- */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  margin: 50px auto;
+  max-width: 1200px;
+  position: relative;
+}
+
+/* Ogni elemento incorniciato */
+.frame {
+  position: relative;
+  background: #fff8e1;
+  border: 8px ridge #d4a373;
+  box-shadow: 5px 8px 15px rgba(0,0,0,0.3);
+  padding: 10px;
+  transition: transform 0.3s ease;
+  max-width: 350px;
+}
+
+/* Foto e video dentro la cornice */
+.frame img,
+.frame video {
+  width: 100%;
+  height: auto;
+  border: 4px solid #fff;
+  display: block;
+}
+
+/* Inclinazioni casuali per effetto disordinato */
+.tilt-left {
+  transform: rotate(-4deg);
+}
+
+.tilt-right {
+  transform: rotate(3deg);
+}
+
+/* Piccola animazione quando passi sopra */
+.frame:hover {
+  transform: rotate(0deg) scale(1.05);
+  z-index: 5;
+  box-shadow: 8px 12px 25px rgba(0,0,0,0.4);
+}
+
+/* Adattamento mobile */
+@media (max-width: 600px) {
+  .gallery {
+    gap: 15px;
+  }
+
+  .frame {
+    max-width: 90%;
+  }
+}
+
+  </style>
 </head>
 <body>
   <div class="navbar">
     <a href="home.html">🎈 Home</a>
     <a href="auguri.html">🎂 Auguri</a>
+    <a href="games.html">🎮 Games</a>
+    <a href="ecommerce.html">🛒 eCommerce</a>
     <a href="regali.html">🎁 Regali</a>
     <a href="contatti.html">✨ Contatti</a>
   </div>
@@ -19,7 +84,23 @@
   <div class="hero">
     <h1>🎂 TANTISSIMI AUGURI!!! 🎂</h1>
     <p>Che la tua giornata sia piena di colori, torta e risate!</p>
-    <img src="img/torta.png" alt="Torta di compleanno" width="200">
   </div>
+
+  <!-- 🎨 GALLERIA ARTISTICA -->
+  <div class="gallery">
+    <div class="frame tilt-left"><img src="gallery/foto1.png" alt="Foto 1"></div>
+    <div class="frame tilt-right"><img src="gallery/image.png" alt="Foto 2"></div>
+    <div class="frame tilt-left"><video src="mm.mp4" controls></video></div>
+    <div class="frame tilt-right"><img src="gallery/foto2.png" alt="Foto 3"></div>
+    <div class="frame tilt-left"><video src="video/video2.mp4" controls></video></div>
+    <div class="frame tilt-right"><img src="gallery/foto3.png" alt="Foto 4"></div>
+    <div class="frame tilt-left"><img src="img/foto1.jpg" alt="Foto 1"></div>
+    <div class="frame tilt-right"><img src="img/foto2.jpg" alt="Foto 2"></div>
+    <div class="frame tilt-left"><video src="video/video1.mp4" controls></video></div>
+    <div class="frame tilt-right"><img src="img/foto3.jpg" alt="Foto 3"></div>
+    <div class="frame tilt-left"><video src="video/video2.mp4" controls></video></div>
+    <div class="frame tilt-right"><img src="img/foto4.jpg" alt="Foto 4"></div>
+  </div>
+
 </body>
 </html>

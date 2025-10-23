@@ -1,16 +1,21 @@
 <!doctype html>
 <html lang="it">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>🎉 FAKE CAPTCHA DI COMPLEANNO 🎉</title>
+  <script type="text/javascript" src="jquery-3.3.1.js"></script>
+  <script src="script.js"></script>
   <style>
     :root {
-      --piece-size: 80px; /* più piccolo ma proporzionato */
+      --piece-size: 80px;
+      /* più piccolo ma proporzionato */
     }
 
     /* SFONDO ANIMATO ARCOBALENO */
-    html, body {
+    html,
+    body {
       height: 100%;
       margin: 0;
       overflow: hidden;
@@ -22,8 +27,13 @@
     }
 
     @keyframes bgMove {
-      0% {background-position: 0 0;}
-      100% {background-position: 100% 100%;}
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 100% 100%;
+      }
     }
 
     /* CONTENITORE CENTRALE */
@@ -34,7 +44,7 @@
       justify-content: center;
       padding: 40px;
       padding-top: 0px;
-      
+
     }
 
     /* CARD DEL CAPTCHA */
@@ -50,9 +60,17 @@
     }
 
     @keyframes spinColors {
-      0% {box-shadow: 0 0 40px magenta, 0 0 80px cyan;}
-      50% {box-shadow: 0 0 40px yellow, 0 0 80px lime;}
-      100% {box-shadow: 0 0 40px red, 0 0 80px blue;}
+      0% {
+        box-shadow: 0 0 40px magenta, 0 0 80px cyan;
+      }
+
+      50% {
+        box-shadow: 0 0 40px yellow, 0 0 80px lime;
+      }
+
+      100% {
+        box-shadow: 0 0 40px red, 0 0 80px blue;
+      }
     }
 
     h1 {
@@ -63,11 +81,25 @@
     }
 
     @keyframes rainbowText {
-      0% {color: red;}
-      25% {color: yellow;}
-      50% {color: lime;}
-      75% {color: cyan;}
-      100% {color: magenta;}
+      0% {
+        color: red;
+      }
+
+      25% {
+        color: yellow;
+      }
+
+      50% {
+        color: lime;
+      }
+
+      75% {
+        color: cyan;
+      }
+
+      100% {
+        color: magenta;
+      }
     }
 
     p.small {
@@ -84,7 +116,8 @@
     .scene {
       position: relative;
       width: 100%;
-      max-width: 300px; /* immagine più piccola */
+      max-width: 300px;
+      /* immagine più piccola */
       margin: 0 auto;
       border-radius: 12px;
       overflow: hidden;
@@ -106,7 +139,8 @@
       border-radius: 10px;
       outline: 4px dashed magenta;
       box-shadow: inset 0 0 20px yellow;
-      background-color: rgba(255, 255, 255, 0.5); /* bianco al 30% di opacità */
+      background-color: rgba(255, 255, 255, 0.5);
+      /* bianco al 30% di opacità */
     }
 
     .piece {
@@ -127,8 +161,13 @@
     }
 
     @keyframes floaty {
-      from { transform: translateY(0px); }
-      to { transform: translateY(-5px); }
+      from {
+        transform: translateY(0px);
+      }
+
+      to {
+        transform: translateY(-5px);
+      }
     }
 
     /* BOTTONI */
@@ -154,8 +193,13 @@
     }
 
     @keyframes pulse {
-      from { transform: scale(1); }
-      to { transform: scale(1.2); }
+      from {
+        transform: scale(1);
+      }
+
+      to {
+        transform: scale(1.2);
+      }
     }
 
     .status {
@@ -189,11 +233,13 @@
     }
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <div class="card">
       <h1>🎂 FAKE PUZZLE CAPTCHA 🎂</h1>
-      <p class="small">Trascina il pezzo per ricomporre l'immagine e accedere al sito di compleanno più brutto del mondo! 🎉</p>
+      <p class="small">Trascina il pezzo per ricomporre l'immagine e accedere al sito di compleanno più brutto del
+        mondo! 🎉</p>
 
       <div class="scene" id="scene">
         <img id="mainImg" class="image" src="image.png" alt="demo image">
@@ -224,110 +270,111 @@
 
   <!-- Manteniamo tutto il tuo script originale -->
   <script>
-  (function(){
-    const scene = document.getElementById('scene');
-    const mainImg = document.getElementById('mainImg');
-    const hole = document.getElementById('hole');
-    const piece = document.getElementById('piece');
-    const status = document.getElementById('status');
-    const resetBtn = document.getElementById('resetBtn');
-    const randomBtn = document.getElementById('randomBtn');
-    const config = { tolerance: 18 };
-    let holePos = {x:0,y:0};
+    (function () {
+      const scene = document.getElementById('scene');
+      const mainImg = document.getElementById('mainImg');
+      const hole = document.getElementById('hole');
+      const piece = document.getElementById('piece');
+      const status = document.getElementById('status');
+      const resetBtn = document.getElementById('resetBtn');
+      const randomBtn = document.getElementById('randomBtn');
+      const config = { tolerance: 18 };
+      let holePos = { x: 0, y: 0 };
 
-    function setStatus(txt, ok=false){status.textContent = txt;status.style.color = ok? 'green':'black'}
+      function setStatus(txt, ok = false) { status.textContent = txt; status.style.color = ok ? 'green' : 'black' }
 
-    function updatePieceBackground(){
-      const w = mainImg.clientWidth;
-      const h = mainImg.clientHeight;
-      piece.style.backgroundImage = `url(${mainImg.src})`;
-      piece.style.backgroundSize = `${w}px ${h}px`;
-      piece.style.backgroundPosition = `-${holePos.x}px -${holePos.y}px`;
-    }
-
-    function layoutElements(){
-      const pieceSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--piece-size'));
-      const w = mainImg.clientWidth;
-      const h = mainImg.clientHeight;
-      hole.style.left = holePos.x + 'px';
-      hole.style.top = holePos.y + 'px';
-      piece.style.left = (w - pieceSize - 10) + 'px';
-      piece.style.top = (h - pieceSize - 10) + 'px';
-      updatePieceBackground();
-    }
-
-    function randomHolePosition(){
-      const pieceSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--piece-size'));
-      const w = mainImg.clientWidth;
-      const h = mainImg.clientHeight;
-      const pad = 20;
-      holePos.x = Math.floor(Math.random() * (w - pieceSize - pad));
-      holePos.y = Math.floor(Math.random() * (h - pieceSize - pad));
-    }
-
-    function checkPlaced(){
-      const px = parseFloat(piece.style.left);
-      const py = parseFloat(piece.style.top);
-      const dx = Math.abs(px - holePos.x);
-      const dy = Math.abs(py - holePos.y);
-      const dist = Math.hypot(dx,dy);
-      if(dist <= config.tolerance){
-        piece.style.left = holePos.x + 'px';
-        piece.style.top = holePos.y + 'px';
-        piece.style.pointerEvents = 'none';
-        setStatus('✅ Verificato! Accesso consentito!');
-        setTimeout(()=>{window.location.href='home.html';},800);
-        return true;
+      function updatePieceBackground() {
+        const w = mainImg.clientWidth;
+        const h = mainImg.clientHeight;
+        piece.style.backgroundImage = `url(${mainImg.src})`;
+        piece.style.backgroundSize = `${w}px ${h}px`;
+        piece.style.backgroundPosition = `-${holePos.x}px -${holePos.y}px`;
       }
-      return false;
-    }
 
-    let drag = {active:false,offsetX:0,offsetY:0};
+      function layoutElements() {
+        const pieceSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--piece-size'));
+        const w = mainImg.clientWidth;
+        const h = mainImg.clientHeight;
+        hole.style.left = holePos.x + 'px';
+        hole.style.top = holePos.y + 'px';
+        piece.style.left = (w - pieceSize - 10) + 'px';
+        piece.style.top = (h - pieceSize - 10) + 'px';
+        updatePieceBackground();
+      }
 
-    function onPointerDown(e){
-      drag.active = true;
-      const rect = scene.getBoundingClientRect();
-      const x = (e.touches? e.touches[0].clientX : e.clientX) - rect.left;
-      const y = (e.touches? e.touches[0].clientY : e.clientY) - rect.top;
-      const left = parseFloat(piece.style.left) || 0;
-      const top = parseFloat(piece.style.top) || 0;
-      drag.offsetX = x - left;
-      drag.offsetY = y - top;
-    }
+      function randomHolePosition() {
+        const pieceSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--piece-size'));
+        const w = mainImg.clientWidth;
+        const h = mainImg.clientHeight;
+        const pad = 20;
+        holePos.x = Math.floor(Math.random() * (w - pieceSize - pad));
+        holePos.y = Math.floor(Math.random() * (h - pieceSize - pad));
+      }
 
-    function onPointerMove(e){
-      if(!drag.active) return;
-      const rect = scene.getBoundingClientRect();
-      const clientX = (e.touches? e.touches[0].clientX : e.clientX);
-      const clientY = (e.touches? e.touches[0].clientY : e.clientY);
-      const x = clientX - rect.left - drag.offsetX;
-      const y = clientY - rect.top - drag.offsetY;
-      const pieceSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--piece-size'));
-      const nx = Math.max(0, Math.min(mainImg.clientWidth - pieceSize, x));
-      const ny = Math.max(0, Math.min(mainImg.clientHeight - pieceSize, y));
-      piece.style.left = nx + 'px';
-      piece.style.top = ny + 'px';
-    }
+      function checkPlaced() {
+        const px = parseFloat(piece.style.left);
+        const py = parseFloat(piece.style.top);
+        const dx = Math.abs(px - holePos.x);
+        const dy = Math.abs(py - holePos.y);
+        const dist = Math.hypot(dx, dy);
+        if (dist <= config.tolerance) {
+          piece.style.left = holePos.x + 'px';
+          piece.style.top = holePos.y + 'px';
+          piece.style.pointerEvents = 'none';
+          setStatus('✅ Verificato! Accesso consentito!');
+          setTimeout(() => { window.location.href = 'home.html'; }, 800);
+          return true;
+        }
+        return false;
+      }
 
-    function onPointerUp(){
-      if(!drag.active) return;
-      drag.active = false;
-      if(!checkPlaced()) setStatus('❌ Non perfetto — riprova!');
-    }
+      let drag = { active: false, offsetX: 0, offsetY: 0 };
 
-    piece.addEventListener('mousedown', onPointerDown);
-    piece.addEventListener('touchstart', onPointerDown,{passive:false});
-    window.addEventListener('mousemove', onPointerMove);
-    window.addEventListener('touchmove', onPointerMove,{passive:false});
-    window.addEventListener('mouseup', onPointerUp);
-    window.addEventListener('touchend', onPointerUp);
+      function onPointerDown(e) {
+        drag.active = true;
+        const rect = scene.getBoundingClientRect();
+        const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+        const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+        const left = parseFloat(piece.style.left) || 0;
+        const top = parseFloat(piece.style.top) || 0;
+        drag.offsetX = x - left;
+        drag.offsetY = y - top;
+      }
 
-    resetBtn.addEventListener('click', ()=>{piece.style.pointerEvents='auto';layoutElements();setStatus('🔄 Sposta di nuovo il pezzo');});
-    randomBtn.addEventListener('click', ()=>{piece.style.pointerEvents='auto';randomHolePosition();layoutElements();setStatus('🎲 Nuova posizione generata!');});
+      function onPointerMove(e) {
+        if (!drag.active) return;
+        const rect = scene.getBoundingClientRect();
+        const clientX = (e.touches ? e.touches[0].clientX : e.clientX);
+        const clientY = (e.touches ? e.touches[0].clientY : e.clientY);
+        const x = clientX - rect.left - drag.offsetX;
+        const y = clientY - rect.top - drag.offsetY;
+        const pieceSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--piece-size'));
+        const nx = Math.max(0, Math.min(mainImg.clientWidth - pieceSize, x));
+        const ny = Math.max(0, Math.min(mainImg.clientHeight - pieceSize, y));
+        piece.style.left = nx + 'px';
+        piece.style.top = ny + 'px';
+      }
 
-    mainImg.addEventListener('load', ()=>{randomHolePosition();layoutElements();});
-    randomHolePosition();layoutElements();
-  })();
+      function onPointerUp() {
+        if (!drag.active) return;
+        drag.active = false;
+        if (!checkPlaced()) setStatus('❌ Non perfetto — riprova!');
+      }
+
+      piece.addEventListener('mousedown', onPointerDown);
+      piece.addEventListener('touchstart', onPointerDown, { passive: false });
+      window.addEventListener('mousemove', onPointerMove);
+      window.addEventListener('touchmove', onPointerMove, { passive: false });
+      window.addEventListener('mouseup', onPointerUp);
+      window.addEventListener('touchend', onPointerUp);
+
+      resetBtn.addEventListener('click', () => { piece.style.pointerEvents = 'auto'; layoutElements(); setStatus('🔄 Sposta di nuovo il pezzo'); });
+      randomBtn.addEventListener('click', () => { piece.style.pointerEvents = 'auto'; randomHolePosition(); layoutElements(); setStatus('🎲 Nuova posizione generata!'); });
+
+      mainImg.addEventListener('load', () => { randomHolePosition(); layoutElements(); });
+      randomHolePosition(); layoutElements();
+    })();
   </script>
 </body>
+
 </html>

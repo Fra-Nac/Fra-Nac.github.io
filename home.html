@@ -6,15 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🎉 BUON COMPLEANNOOO!!! 🎉</title>
   <link rel="stylesheet" href="style.css">
+  <script type="text/javascript" src="jquery-3.3.1.js"></script>
+  <script src="script.js"></script>
 </head>
 
 <body>
   <div class="navbar">
-  <a href="home.html">🎈 Home</a>
-  <a href="auguri.html">🎂 Auguri</a>
-  <a href="regali.html">🎁 Regali</a>
-  <a href="contatti.html">✨ Contatti</a>
-</div> 
+    <a href="home.html">🎈 Home</a>
+    <a href="auguri.html">🎂 Auguri</a>
+    <a href="games.html">🎮 Games</a>
+    <a href="ecommerce.html">🛒 eCommerce</a>
+    <a href="regali.html">🎁 Regali</a>
+    <a href="contatti.html">✨ Contatti</a>
+  </div>
 
 
   <marquee direction="left" scrollamount="15">🎉🎉 BUON COMPLEANNOOOO!!! 🎉🎉 TANTI AUGURIII!!! 🎶🥳</marquee>
@@ -35,15 +39,6 @@
   </div>
 
   <script>
-    // Effetto brillantini che seguono il mouse
-    document.addEventListener("mousemove", e => {
-      const sparkle = document.createElement("div");
-      sparkle.className = "sparkle";
-      sparkle.style.left = e.pageX + "px";
-      sparkle.style.top = e.pageY + "px";
-      document.body.appendChild(sparkle);
-      setTimeout(() => sparkle.remove(), 1000);
-    });
 
     // Effetto particelle random sullo sfondo
     function createRandomSparkles() {

@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HUB GIOCHI — Stile Brutto Deluxe</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="text/javascript" src="jquery-3.3.1.js"></script>
+  <script src="script.js"></script>
+  <style>
+    :root {
+      --accent1: magenta;
+      --accent2: lime;
+      --accent3: cyan;
+      --card-w: 260px;
+    }
+
+
+
+    /* CONTAINER */
+    .container {
+      max-width: 1100px;
+      margin: 32px auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 8px double var(--accent1);
+      border-radius: 24px;
+      box-shadow: 0 0 40px var(--accent1);
+    }
+
+    /* NAVBAR ORRIDA */
+    .gamenavbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 18px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent1));
+      border-radius: 12px;
+      border: 4px solid var(--accent3);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .gamenavbar .brand {
+      font-size: 20px;
+      font-weight: 900;
+      color: black;
+      text-shadow: 2px 2px 6px white;
+    }
+
+    .gamenavbar .links a {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 3px solid purple;
+      background: linear-gradient(90deg, yellow, lime, cyan);
+      color: black;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 18px;
+      margin-top: 12px;
+    }
+
+    .hero h1 {
+      margin: 6px 0;
+      font-size: 36px;
+      color: red;
+      text-shadow: 3px 3px 10px yellow;
+      animation: wobble 0.6s infinite alternate;
+    }
+
+    @keyframes wobble {
+      from {
+        transform: rotate(-2deg);
+      }
+
+      to {
+        transform: rotate(2deg);
+      }
+    }
+
+    .hero p {
+      margin: 6px 0;
+      font-weight: 700;
+      color: black;
+      background: white;
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 12px;
+      box-shadow: 0 0 14px lime;
+    }
+
+    /* GRID GIOCHI */
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .gamecard {
+      width: var(--card-w);
+      min-height: 160px;
+      background: repeating-linear-gradient(45deg, var(--accent1), var(--accent1) 12px, yellow 12px, yellow 24px);
+      border-radius: 16px;
+      border: 5px double var(--accent2);
+      box-shadow: 0 0 30px var(--accent3);
+      padding: 12px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .gamecard:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .gamecard img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 0 auto 6px;
+      border: 4px solid white;
+      box-shadow: 0 0 12px magenta;
+    }
+
+    .gamecard h3 {
+      margin: 4px 0;
+      font-size: 18px;
+      color: black;
+      text-shadow: 1px 1px 2px white;
+    }
+
+    .gamecard p {
+      margin: 0;
+      font-size: 12px;
+      color: black;
+      font-weight: 800;
+    }
+
+    .gamecard .btn {
+      margin-top: 8px;
+      display: inline-block;
+      padding: 8px 10px;
+      background: linear-gradient(90deg, cyan, lime, yellow);
+      border: 4px solid purple;
+      color: black;
+      font-weight: 900;
+      border-radius: 10px;
+      text-decoration: none;
+    }
+
+    /* FOOTER */
+    .footer {
+      margin-top: 18px;
+      padding: 12px;
+      text-align: center;
+      font-weight: 900;
+      color: black;
+      background: linear-gradient(90deg, var(--accent3), yellow);
+      border-radius: 10px;
+      border: 3px dashed purple;
+    }
+
+    /* BRILLANTINI MOUSE */
+
+
+    /* RESPONSIVE */
+    @media (max-width:760px) {
+      .gamecard {
+        width: 46%;
+      }
+    }
+
+    @media (max-width:420px) {
+      .gamecard {
+        width: 100%;
+      }
+
+      .navbar {
+        flex-direction: column;
+        gap: 8px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="navbar">
+    <a href="home.html">🎈 Home</a>
+    <a href="auguri.html">🎂 Auguri</a>
+    <a href="games.html">🎮 Games</a>
+        <a href="ecommerce.html">🛒 eCommerce</a>
+    <a href="regali.html">🎁 Regali</a>
+    <a href="contatti.html">✨ Contatti</a>
+  </div>
+
+  <div class="hero">
+    <h1>🎁 I Giochi!!! 🎁</h1>
+  </div>
+  <div class="container" role="main" aria-labelledby="hubTitle">
+    <nav class="gamenavbar" aria-label="Navigazione principale">
+      <div class="brand">HUB GIOCHI</div>
+      <div class="links">
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="contatti.html">Contatti</a>
+      </div>
+    </nav>
+
+    <section class="hero" id="hubTitle">
+      <h1>🎉 Benvenuta nel Centro Giochi 🎉</h1>
+      <p>Clicca un gioco, entra nel caos. Buon divertimento!</p>
+    </section>
+
+    <section class="grid" aria-label="Elenco giochi">
+      <!-- Card esempio: modifica href se i tuoi file hanno nomi diversi -->
+      <article class="gamecard" role="article" aria-labelledby="g1">
+        <img src="target.png" alt="Tiro al bersaglio">
+        <h3 id="g1">🎯 Tiro al Bersaglio</h3>
+        <p>Colpisci le Anto volanti!</p>
+        <a class="btn" href="tiro.html">Gioca →</a>
+      </article>
+
+      <article class="gamecard" role="article" aria-labelledby="g2">
+        <img src="memory.png" alt="Memory Game">
+        <h3 id="g2">🧠 Memory Game</h3>
+        <p>Gira le carte e trova le Anto uguali.</p>
+        <a class="btn" href="memory.html">Gioca →</a>
+      </article>
+
+      <article class="gamecard" role="article" aria-labelledby="g3">
+        <img
+          src="race.png"
+          alt="Race">
+        <h3 id="g3">🚗 Paoli Race</h3>
+        <p>Raggiungi la Paoli senza schiantarti.</p>
+        <a class="btn" href="corsa.html">Gioca →</a>
+      </article>
+
+      <article class="gamecard" role="article" aria-labelledby="g4">
+        <img
+          src="suika.png"
+          alt="Suika">
+        <h3 id="g4">🟣 Anto's Balls</h3>
+        <p>Raggruppa tutte le palle di Anto.</p>
+        <a class="btn" href="suika.html">Gioca →</a>
+      </article>
+
+      <article class="gamecard" role="article" aria-labelledby="g5">
+        <img
+          src="puzzle.png"
+          alt="Puzzle">
+        <h3 id="g5">🧩 Puzzle a Incastro</h3>
+        <p>Risolvi i complicatissimi puzzle ad incastro di Anto.</p>
+        <a class="btn" href="puzzle.html">Gioca →</a>
+      </article>
+
+      <article class="gamecard" role="article" aria-labelledby="g6">
+        <img
+          src="slot.png"
+          alt="Slot">
+        <h3 id="g6">🎰 Slot Machine</h3>
+        <p>Un po di sano Gamblingsz.</p>
+        <a class="btn" href="slot.html">Gioca →</a>
+      </article>
+    </section>
+
+    <div class="footer">🎈 Hub fatto a mano — Estetica volutamente brutta 🎈</div>
+  </div>
+
+  <script>
+
+
+    // piccoli tocchi: anima le card appena caricate
+    document.querySelectorAll('.gamecard').forEach((c, i) => {
+      c.style.transform = 'translateY(20px) scale(.98)';
+      c.style.opacity = '0';
+      setTimeout(() => {
+        c.style.transition = 'all 450ms cubic-bezier(.2,.9,.2,1)';
+        c.style.transform = '';
+        c.style.opacity = '1';
+      }, 120 + i * 80);
+    });
+  </script>
+</body>
+
+</html>

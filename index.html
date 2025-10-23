@@ -5,6 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>🔐 Login Super Kitsch</title>
+    <script type="text/javascript" src="jquery-3.3.1.js"></script>
+    <script src="script.js"></script>
     <style>
         :root {
             --accent1: magenta;
@@ -137,10 +139,11 @@
 
         .eye-btn {
             position: absolute;
-            right: calc((100% - var(--input-w)) / 2 + 12px); /* allineamento con l'input */
+            right: calc((100% - var(--input-w)) / 2 + 12px);
+            /* allineamento con l'input */
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255,255,255,0.9);
+            background: rgba(255, 255, 255, 0.9);
             border: 3px solid var(--accent1);
             border-radius: 10px;
             padding: 6px 8px;
@@ -270,9 +273,11 @@
             <div class="field">
                 <label for="password">PASSWORD</label>
                 <div class="password-wrapper">
-                    <input id="password" type="password" autocomplete="current-password" placeholder="••••••••" required>
+                    <input id="password" type="password" autocomplete="current-password" placeholder="••••••••"
+                        required>
                     <!-- pulsante occhio -->
-                    <button id="toggleEye" type="button" class="eye-btn" aria-pressed="false" aria-label="Mostra password">👁️</button>
+                    <button id="toggleEye" type="button" class="eye-btn" aria-pressed="false"
+                        aria-label="Mostra password">👁️</button>
                 </div>
             </div>
 
@@ -280,7 +285,8 @@
                 <input id="robotChk" type="checkbox" aria-describedby="robotHelp" />
                 <div>
                     <div class="robot-label">Non sono un robot</div>
-                    <div id="robotHelp" style="font-size:12px;color:#111;">Devi premere qui prima di poter andare al captcha</div>
+                    <div id="robotHelp" style="font-size:12px;color:#111;">Devi premere qui prima di poter andare al
+                        captcha</div>
                 </div>
             </div>
 
