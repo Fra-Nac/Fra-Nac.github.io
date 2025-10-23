@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BruttoE-Shop 🎉</title>
+  <title>Anto Shop 🎉</title>
   <style>
     /* Estetica volutamente brutta e super colorata */
     :root {
@@ -485,7 +485,7 @@
 
 <body>
   <header>
-    <div class="logo">BRUTTO-eShop</div>
+    <div class="logo">アント ショップ</div>
 
     <nav>
       <a href="#/">Home</a>
@@ -501,14 +501,14 @@
   <main id="app">
     <!-- Render dinamico qui -->
   </main>
-  <footer>Progetto scherzo — look volutamente orrendo 🌈🧨</footer>
+  <footer>Tutti gli ordini vengono spediti da Saluzzo (CN) con costi di spedizione fissi (100€). <br>Non ci assumiamo nessuna responsabilità per pacchi smarriti. Cazzi vostri.</footer>
 
   <script>
 
     // Dati dei prodotti (client-only)
     const PRODUCTS = [
       {
-        id: 'p1', title: 'Cuscino Fuoco Totale', price: '19.99€', category: 'home', desc: 'Un cuscino con colori che incredibile. Ideale per appoggiarci il culo sopra.',
+        id: 'p1', title: 'Cuscino Fuoco Totale', price: '19.99€', category: 'home', desc: 'Un cuscino comodissimo, ideale per appoggiarci il culo sopra.',
         imageUrl: 'img/cuscino1black.png', variants: {
           Nero: 'img/cuscino1black.png',
           Rosso: 'img/cuscino1red.png',
@@ -516,19 +516,19 @@
         }, sizes: ['Nero', 'Rosso', 'Blu'], related: ['p2', 'p3'], comments: [{ user: 'Luca', text: 'Mi ha folgorato! Lo uso sempre quando ho le emorroidi, è comodissimo.', date: '2025-10-01' }]
       },
       {
-        id: 'p2', title: 'Maglia Incredibile Ninuzza Limited Edition', price: '29.90€', category: 'home', desc: 'Lampada che cambia colore ogni secondo. Fastidiosa ma bella.',
+        id: 'p2', title: 'Maglia Incredibile Ninuzza Limited Edition', price: '29.90€', category: 'home', desc: 'Maglietta di design, frutto di una collaborazione tra i migliori stilisti italiani.',
         imageUrl: 'img/maglia1.jpeg', sizes: ['S', 'M', 'L'], related: ['p1', 'p4'], comments: []
       },
       {
-        id: 'p3', title: 'Tazza Buongiornissimo', price: '9.50€', category: 'kitchen', desc: 'Tazza che ti urla dentro (metaforicamente). Perfetta per caffeina e drammi mattutini.',
+        id: 'p3', title: 'Tazza Buongiornissimo', price: '9.50€', category: 'kitchen', desc: 'Per iniziare la giornata con il piede giusto.',
         imageUrl: 'img/tazza1.jpeg', sizes: ['S', 'M', 'L'], related: ['p1'], comments: [{ user: 'Anna', text: 'La uso ogni mattina, i miei vicini sono preoccupati.', date: '2025-09-20' }]
       },
       {
-        id: 'p4', title: 'Peluche Antonietta', price: '12.00€', category: 'gadgets', desc: 'Occhiali con lenti specchiate che riflettono male.',
+        id: 'p4', title: 'Peluche Antonietta', price: '12.00€', category: 'gadgets', desc: 'Morbidissimo peluche.',
         imageUrl: 'img/peluche1.png', sizes: ['S', 'M', 'L'], related: ['p2'], comments: []
       },
       {
-        id: 'p5', title: 'Felpa Swag Gags', price: '14.40€', category: 'clown', desc: 'Cappello a cipolla con pompon gigante. Ridicolo e resistente.',
+        id: 'p5', title: 'Felpa Swag Gags', price: '14.40€', category: 'clown', desc: 'Il drip definitivo, per veri giapponesi.',
         imageUrl: 'img/maglia2.png', sizes: ['S', 'M', 'L'], related: ['p3'], comments: [{ user: 'Bea', text: 'Rido ancora quando lo indosso.', date: '2025-08-15' }]
       },
       {
@@ -578,8 +578,8 @@
       const prods = category ? PRODUCTS.filter(p => p.category === category) : PRODUCTS;
       el.innerHTML = `
         <section class="hero">
-          <div class="title">Benvenuti su <strong>BRUTTO-eShop</strong> — il peggio del bello</div>
-          <div class="search"><input id="q" placeholder="Cerca... (prova 'Tazza')"></div>
+          <div class="title">Benvenuti su <strong>Anto Shop</strong> — solo merchandise per veri fan</div>
+          <div class="search"><input id="q" placeholder="Cerca... prova 'Body Pillow'"></div>
         </section>
         <section class="grid" id="grid"></section>
       `;
