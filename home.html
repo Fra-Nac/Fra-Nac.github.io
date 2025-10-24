@@ -8,9 +8,39 @@
   <link rel="stylesheet" href="style.css">
   <script type="text/javascript" src="jquery-3.3.1.js"></script>
   <script src="script.js"></script>
+  <style>
+    /* Stile semplice per il pulsante */
+    .audio-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 15px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      background: #2183b0;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+  </style>
 </head>
 
 <body>
+   <!-- AUDIO 🎵 -->
+  <audio id="bg-audio" autoplay loop>
+    <source src="audio/auguri.mp3" type="audio/mpeg">
+    Il tuo browser non supporta l'audio :(
+  </audio>
+
+  <!-- Pulsante Play / Pause -->
+  
+
   <div class="navbar">
     <a href="home.html">🎈 Home</a>
     <a href="auguri.html">🎂 Auguri</a>
@@ -18,8 +48,9 @@
     <a href="ecommerce.html">🛒 eCommerce</a>
     <a href="regali.html">🎁 Regali</a>
     <a href="contatti.html">✨ Contatti</a>
-  </div>
+    <button id="toggleAudio" class="audio-btn">🔈</button>
 
+  </div>
 
   <marquee direction="left" scrollamount="15">🎉🎉 BUON COMPLEANNOOOO!!! 🎉🎉 TANTI AUGURIII!!! 🎶🥳</marquee>
 
@@ -52,6 +83,18 @@
       setTimeout(() => sparkle.remove(), 2000);
     }
     setInterval(createRandomSparkles, 100);
+     const music = document.getElementById("bg-audio");
+    const btn = document.getElementById("toggleAudio");
+
+    btn.addEventListener("click", () => {
+      if (music.paused) {
+        music.play();
+        btn.textContent = "🔈";
+      } else {
+        music.pause();
+        btn.textContent = "🔇";
+      }
+    });
   </script>
 </body>
 
