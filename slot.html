@@ -84,6 +84,12 @@ button:hover {
 .reel img.spin {
   transform: translateY(10px);
 }
+.subtitle {
+  font-size: 20px;
+  color: white;
+  text-shadow: 0 0 5px gold;
+  margin-top: -10px;
+}
 
 
   </style>
@@ -99,7 +105,7 @@ button:hover {
   </div>
   <div class="slot">
   <h1>🎰 Slot Machine 🎰</h1>
-
+<p class="subtitle">Prova la fortuna e vinci i nostri premi esclusivi!</p>
   <div class="slot-machine">
   <div class="reel"><img id="reel1" src="img/tazza1.jpeg" alt="cherry"></div>
   <div class="reel"><img id="reel2" src="img/maglia2.png" alt="lemon"></div>
@@ -178,12 +184,21 @@ function checkResult(spins) {
   const [s1, s2, s3] = spins;
   if (s1 === s2 && s2 === s3) {
     message.textContent = "🎉 JACKPOT! Hai vinto premio esclusivo del nostro Shop! 🎉";
+    
+    // Effetto coriandoli 🎉
+    confetti({
+      particleCount: 200,
+      spread: 80,
+      origin: { y: 0.6 }
+    });
+
   } else if (s1 === s2 || s2 === s3 || s1 === s3) {
     message.textContent = "😉 Due simboli uguali!";
   } else {
     message.textContent = "😢 Ritenta!";
   }
 }
+
 
 function getRandomSymbol() {
   const index = Math.floor(Math.random() * symbols.length);
@@ -192,5 +207,7 @@ function getRandomSymbol() {
 
 
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
 </body>
 </html>
