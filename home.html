@@ -28,13 +28,21 @@
       50% { transform: scale(1.1); }
       100% { transform: scale(1); }
     }
+    .card img {
+  width: 250px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5%;
+  border: 3px solid white;
+  box-shadow: 0 0 15px magenta;
+}
   </style>
 </head>
 
 <body>
    <!-- AUDIO 🎵 -->
   <audio id="bg-audio" autoplay loop>
-    <source src="audio/auguri.mp3" type="audio/mpeg">
+    <source src="audio/augur.mp3" type="audio/mpeg">
     Il tuo browser non supporta l'audio :(
   </audio>
 
@@ -63,11 +71,17 @@
 
   <div class="cards">
     <div class="card">
-      <img src="image.png" alt="Regalo" />
+      <img src="image1.jpeg" alt="Regalo" />
     </div>
-    <div class="card">🎂 Torta a volontà!</div>
-    <div class="card">🎊 Amici, musica e confusione!</div>
-    <div class="card">🎈 Colori e glitter ovunque!</div>
+    <div class="card">
+      <img src="gif1.gif" alt="Regalo" />
+    </div>
+    <div class="card">
+      <img src="3190.gif" alt="Regalo" />
+    </div>
+    <div class="card">
+      <img src="pedro.gif" alt="Regalo" />
+    </div>
   </div>
 
   <script>

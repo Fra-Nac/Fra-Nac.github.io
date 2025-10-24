@@ -119,14 +119,7 @@ body {
   animation: spin 3s infinite linear;
 }
 
-.card img {
-  width: 250px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 5%;
-  border: 3px solid white;
-  box-shadow: 0 0 15px magenta;
-}
+
 
 
 @keyframes spin {

@@ -101,8 +101,8 @@ button:hover {
   <h1>🎰 Slot Machine 🎰</h1>
 
   <div class="slot-machine">
-  <div class="reel"><img id="reel1" src="img/funko2.png" alt="cherry"></div>
-  <div class="reel"><img id="reel2" src="img/funko3.png" alt="lemon"></div>
+  <div class="reel"><img id="reel1" src="img/tazza1.jpeg" alt="cherry"></div>
+  <div class="reel"><img id="reel2" src="img/maglia2.png" alt="lemon"></div>
   <div class="reel"><img id="reel3" src="img/funko1.png" alt="grape"></div>
 </div>
 
@@ -114,9 +114,9 @@ button:hover {
   <script>
     const symbols = [
   "img/funko1.png",
-  "img/funko2.png",
-  "img/funko3.png",
+  "img/bodypillow2.png",
   "img/maglia2.png",
+  "img/tazza1.jpeg",
   "img/peluche1.png"
 ];
 
@@ -177,7 +177,7 @@ function stopReel(index, intervals, spins) {
 function checkResult(spins) {
   const [s1, s2, s3] = spins;
   if (s1 === s2 && s2 === s3) {
-    message.textContent = "🎉 JACKPOT! Hai vinto! 🎉";
+    message.textContent = "🎉 JACKPOT! Hai vinto premio esclusivo del nostro Shop! 🎉";
   } else if (s1 === s2 || s2 === s3 || s1 === s3) {
     message.textContent = "😉 Due simboli uguali!";
   } else {

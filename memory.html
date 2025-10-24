@@ -250,13 +250,14 @@
         grid-template-columns: repeat(4, 1fr);
       }
     }
-    .card-img {
-  width: 70px;
-  height: 70px;
+    .cardimg {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   border-radius: 8px;
-  box-shadow: 0 0 10px white;
+  display: block;
 }
+
 
   </style>
 </head>
@@ -295,14 +296,14 @@
 
   // 🖼️ Usa immagini invece delle emoji
   const symbols = [
-    'img/mela.png',
-    'img/arancia.png',
-    'img/anguria.png',
-    'img/uva.png',
-    'img/ciliegia.png',
-    'img/fragola.png',
-    'img/kiwi.png',
-    'img/ananas.png'
+    'img/tessera1.png',
+    'img/tessera2.png',
+    'img/tessera3.png',
+    'img/tessera4.png',
+    'img/tessera5.png',
+    'img/tessera6.png',
+    'img/tessera7.png',
+    'img/tessera8.png'
   ];
 
   let firstCard = null;
@@ -340,7 +341,7 @@
       card.innerHTML = `
         <div class="card-inner">
           <div class="card-front">
-            <img src="${src}" alt="immagine" class="card-img">
+            <img src="${src}" alt="immagine" class="cardimg">
           </div>
           <div class="card-back">❓</div>
         </div>
