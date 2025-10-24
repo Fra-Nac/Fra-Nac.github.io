@@ -261,7 +261,7 @@
             let gameRunning = false;
             let obstacles = [];
             let timerInterval;
-            let timeLeft = 5;
+            let timeLeft = 15;
             let finalBossSpawned = false;
 
             // Mostra timer nel punteggio
@@ -274,7 +274,7 @@
             timerDisplay.style.border = "3px solid #006666";
             timerDisplay.style.borderRadius = "10px";
             timerDisplay.style.boxShadow = "0 0 10px #00cccc";
-            timerDisplay.textContent = "⏱ Tempo: 30s";
+            timerDisplay.textContent = "⏱ Tempo: 15s";
             document.querySelector('.hud').appendChild(timerDisplay);
 
             const carState = {
@@ -288,12 +288,12 @@
                 gameRunning = true;
                 score = 0;
                 speed = 3.5;
-                timeLeft = 5;
+                timeLeft = 15;
                 finalBossSpawned = false;
                 obstacles.forEach(o => o.remove());
                 obstacles = [];
                 scoreDisplay.textContent = "Punteggio: 0";
-                timerDisplay.textContent = "⏱ Tempo: 30s";
+                timerDisplay.textContent = "⏱ Tempo: 15s";
                 startBtn.disabled = true;
                 startBtn.textContent = "Gioco in corso...";
                 gameInterval = requestAnimationFrame(updateGame);
@@ -322,7 +322,7 @@
                 boss.style.height = "120px";
                 boss.style.left = "30px";
                 boss.style.top = "-120px";
-                boss.style.backgroundImage = "url('memory.png')";
+                boss.style.backgroundImage = "url('paoli.png')";
                 boss.style.backgroundSize = "cover";
                 boss.style.boxShadow = "0 0 30px red";
                 boss.style.border = "3px solid darkred";
@@ -409,7 +409,7 @@
 
                 // elemento video
                 const video = document.createElement('video');
-                video.src = "mm.mp4"; // <-- metti qui il tuo file video
+                video.src = "trip.mp4"; // <-- metti qui il tuo file video
                 video.controls = true;
                 video.autoplay = true;
                 video.style.width = "100%";

@@ -88,19 +88,23 @@
 
   <!-- 🎨 GALLERIA ARTISTICA -->
   <div class="gallery">
-    <div class="frame tilt-left"><img src="gallery/foto1.png" alt="Foto 1"></div>
-    <div class="frame tilt-right"><img src="gallery/image.png" alt="Foto 2"></div>
-    <div class="frame tilt-left"><video src="trip.mp4" controls></video></div>
-    <div class="frame tilt-right"><img src="gallery/foto2.png" alt="Foto 3"></div>
-    <div class="frame tilt-left"><video src="video/video2.mp4" controls></video></div>
-    <div class="frame tilt-right"><img src="gallery/foto3.png" alt="Foto 4"></div>
-    <div class="frame tilt-left"><img src="img/foto1.jpg" alt="Foto 1"></div>
-    <div class="frame tilt-right"><img src="img/foto2.jpg" alt="Foto 2"></div>
-    <div class="frame tilt-left"><video src="video/video1.mp4" controls></video></div>
-    <div class="frame tilt-right"><img src="img/foto3.jpg" alt="Foto 3"></div>
-    <div class="frame tilt-left"><video src="video/video2.mp4" controls></video></div>
-    <div class="frame tilt-right"><img src="img/foto4.jpg" alt="Foto 4"></div>
+    <div class="frame tilt-left"><img src="gallery/foto1.png" alt="Foto 1" class="sound" data-audio="audio/senpai.mp3"></div>
+    <div class="frame tilt-right"><img src="gallery/foto2.png" alt="Foto 3"class="sound" data-audio="audio/wow.mp3"></div>
+    <div class="frame tilt-right"><img src="gallery/foto3.png" alt="Foto 4" class="sound" data-audio="audio/yamete.mp3"></div>
+    <div class="frame tilt-left"><img src="gallery/foto4.jpeg" alt="Foto 1" class="sound" data-audio="audio/nya.mp3"></div>
+    <div class="frame tilt-right"><img src="gallery/foto5.png" alt="Foto 2" class="sound" data-audio="audio/ara-ara.mp3"></div>
+    
   </div>
+<script>
+  const elements = document.querySelectorAll('.sound');
 
+elements.forEach(el => {
+  el.addEventListener('click', () => {
+    let audio = new Audio(el.dataset.audio);
+    audio.play();
+  });
+});
+
+</script>
 </body>
 </html>
